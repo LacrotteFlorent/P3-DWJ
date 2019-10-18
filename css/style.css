@@ -35,10 +35,6 @@ footer {
     height: 800px;
 }
 
-#carte {
-    height: 800px;
-}
-
 #informations {
     height: 800px;
 }
@@ -216,6 +212,10 @@ header {
 
 }
 
+.startHidden {
+    display: none;
+}
+
 /* Type de bloc */
 .blocType1 {
     height: 100px;
@@ -227,4 +227,35 @@ header {
 
 .blocType3 {
     height: 300px;
+}
+
+
+
+                                                                                                               /* Boutons slider */
+
+/* Boutons diapo */
+#boutonsDiapo button {
+    border: none;
+    background-color: transparent;
+}
+
+/*Boutons slide*/
+#boutonsAutreSlide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#boutonsAutreSlide div {
+    margin-left: 20px;
+    width: 15px;
+    height: 15px;
+    background-color: black;
+}
+
+
+
+                                                                                                              /* Carte */
+
+#carte {
+    height: 800px;
 }
