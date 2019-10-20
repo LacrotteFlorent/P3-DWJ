@@ -64,19 +64,34 @@ $(function() {
 
 
 
+                                                                            /* CARTE */
 
 
 
+//script Leflet insertion de la carte
+let mymap = L.map('carte').setView([48.210918, 16.371108], 12);
 
 
+//couche de tuiles
+L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+	attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+    maxZoom: 15,
+    minZoom: 12,
+	id: 'mapbox.streets',
+	accessToken: 'your.mapbox.access.token'
+}).addTo(mymap);
 
+// Nous ajoutons un marqueur
+let marker = L.marker([48.211314, 16.384902]).addTo(mymap);
 
-
-
-
-
-
-
+// Nous parcourons la liste des villes
+/*
+for (ville in villes) {
+	var marker = L.marker([villes[ville].lat, villes[ville].lon]).addTo(macarte);
+	// Nous ajoutons la popup. A noter que son contenu (ici la variable ville) peut être du HTML
+	marker.bindPopup(ville);
+} */   
+//on met la latitude et la longitude dans un tableau
 
 
 /////////////////////////////////////////////////ESSAIS///////////////////////////////////////////
