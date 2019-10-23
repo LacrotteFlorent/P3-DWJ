@@ -245,17 +245,43 @@ header {
     justify-content: center;
     align-items: center;
 }
-#boutonsAutreSlide div {
+#boutonsAutreSlide button {
     margin-left: 20px;
-    width: 15px;
-    height: 15px;
-    background-color: black;
+    background: transparent;
+    border: none;
 }
 
 
 
                                                                                                               /* Carte */
 
+
+/* Hauteur de la carte */
 #carte {
     height: 800px;
+}
+
+/* Popup des marqueurs */
+.leaflet-popup {
+    font-family: Roboto Slab, Arial, sans-serif;
+}
+
+.leaflet-popup p {
+    font-size: 1.3em;
+}
+
+.mentions {
+    font-weight: bold;
+}
+
+/* Popup station ouverte */
+.stOpen .leaflet-popup-content-wrapper, .custom .leaflet-popup-tip {
+    background-color: cornsilk;
+    color: #333;
+}
+
+/* Popup station fermée */
+.stClose .leaflet-popup-content-wrapper, .custom .leaflet-popup-tip {
+    background-color: #952e28;
+    color:cornsilk;
 }
