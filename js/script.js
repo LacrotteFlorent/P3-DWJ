@@ -8,6 +8,7 @@ let apiKey = 'd48e8a6be13635c9408cd25496e3615a596d0a51';
                                                                             /* DIAPO */
 
 let boutons = "#btnPrev, #btnPlay, #btnNext, #btnPause, #btnSlide1, #btnSlide2, #btnSlide3, #btnSlide4, #btnSlide5, #btnSlide6";
+
 // Fonctions de désactivation des boutons pour gérer le clic quand l'animation est en cours
 function desactiverBtns () {
     $(boutons).prop('disabled', true);
@@ -20,9 +21,10 @@ function activerBtns () {
 function nextDiapo () {
     desactiverBtns();
     clearInterval(intervalID);
-    $('#sliderRow > div:visible').animate({marginLeft:"-3500"}, 800,"linear", function() {
+    $('#sliderRow > div:visible').animate({marginLeft:"-3500px"}, 800,"linear", function() {
         if($(this).is('#sliderRow > div:last-child')) {
-            $('#slide1').css('margin-left','3500px').show(function() {
+            $('#slide1').show(function() {
+                imageSlide();
                 $(this).animate({marginLeft:"0px"},800,"linear", function() {
                     activerBtns();
                     if(tempoOn===true) {
@@ -30,10 +32,11 @@ function nextDiapo () {
                     }
                 });
             });
-            $(this).hide();
+            $(this).hide().css('margin-left','3500px');
         }
         else {
-            $(this).next('div').css('margin-left','3500px').show(function() {
+            $(this).next('div').show(function() {
+                imageSlide();
                 $(this).animate({marginLeft:"0px"},800,"linear", function() {
                     activerBtns();
                     if(tempoOn===true) {
@@ -41,7 +44,7 @@ function nextDiapo () {
                     }
                 });
             });
-            $(this).hide();
+            $(this).hide().css('margin-left','3500px');
         }
     });
 }
@@ -50,9 +53,10 @@ function nextDiapo () {
 function prevDiapo () {
     desactiverBtns();
     clearInterval(intervalID);
-    $('#sliderRow > div:visible').animate({marginLeft:"-3500"}, 800,"linear", function() {
+    $('#sliderRow > div:visible').animate({marginLeft:"-3500px"}, 800,"linear", function() {
         if(($(this).is('#sliderRow > div:first-child'))) {
-            $('#slide6').css('margin-left','3500px').show(function() {
+            $('#slide6').show(function() {
+                imageSlide();
                 $(this).animate({marginLeft:"0px"},800,"linear", function() {
                     activerBtns();
                     if(tempoOn===true) {
@@ -60,10 +64,11 @@ function prevDiapo () {
                     }
                 });
             });
-            $(this).hide();
+            $(this).hide().css('margin-left','3500px');
         }
         else {
-            $(this).prev('div').css('margin-left','3500px').show(function() {
+            $(this).prev('div').show(function() {
+                imageSlide();
                 $(this).animate({marginLeft:"0px"},800,"linear", function() {
                     activerBtns();
                     if(tempoOn===true) {
@@ -71,7 +76,7 @@ function prevDiapo () {
                     }
                 });
             });
-            $(this).hide();
+            $(this).hide().css('margin-left','3500px');
         }
     });
 }
@@ -83,7 +88,7 @@ function tempo() {
     intervalID = setInterval(nextDiapo,5000);
 }
 
-// Liens vers les boutons de la diapo
+// Boutons de la diapo
 $(function() {
     tempo();
     $('#btnPrev').on('click', function() {prevDiapo(); console.log("clic precedent");});
@@ -95,15 +100,15 @@ $(function() {
 // Boutons slides
 let boutonsSlides = ['#btnSlide1','#btnSlide2','#btnSlide3','#btnSlide4','#btnSlide5','#btnSlide6'];
 let slides = ['#slide1','#slide2','#slide3','#slide4','#slide5','#slide6'];
-let compteur = 0;
 
-// Liens vers les slides
+// Selecteurs de slides
 for (let i=0 ; i < slides.length ; i++) {
     $(boutonsSlides[i]).on('click', function() {
         desactiverBtns();
         clearInterval(intervalID);
         $('#sliderRow > div:visible').animate({marginLeft:"-3500"}, 800,"linear", function() {
-            $(slides[i]).css('margin-left','3500px').show(function() {
+            $(slides[i]).show(function() {
+                imageSlide();
                 $(slides[i]).animate({marginLeft:"0px"},800,"linear", function() {
                     activerBtns();
                     if(tempoOn===true) {
@@ -111,20 +116,19 @@ for (let i=0 ; i < slides.length ; i++) {
                     }
                 });
             });
-            $(this).hide();
+            $(this).hide().css('margin-left','3500px');
         });
     });
 }
 
-// Changements des images suivant la slide active
-function imageSlide () {                    // A Placer a chaque fonction ou action qui change la slide
-    $('')// selectionn de la slide visible
-
-
-    //selection du bouton correspondant
-
-    // changement du l'image de du bouton
-    // changement des images des autres boutons
+// Changements des apparances des selecteurs de slide suivant la slide active
+function imageSlide() {
+    for (let i=0; i < slides.length; i++) {
+        if($('#sliderRow > div:visible').is($(slides[i]))) {
+            $('#btnSlide1, #btnSlide2, #btnSlide3, #btnSlide4, #btnSlide5, #btnSlide6').html('<i class="far fa-circle"></i>');
+            $(boutonsSlides[i]).html('<i class="fas fa-circle"></i>');
+        }
+    }
 }
 
 
