@@ -4,7 +4,6 @@ let apiKey = 'd48e8a6be13635c9408cd25496e3615a596d0a51';
 
 
 
-
                                                                             /* DIAPO */
 
 let boutons = "#btnPrev, #btnPlay, #btnNext, #btnPause, #btnSlide1, #btnSlide2, #btnSlide3, #btnSlide4, #btnSlide5, #btnSlide6";
@@ -25,7 +24,7 @@ function nextDiapo () {
         if($(this).is('#sliderRow > div:last-child')) {
             $('#slide1').show(function() {
                 imageSlide();
-                $(this).animate({marginLeft:"0px"},800,"linear", function() {
+                $(this).animate({marginLeft:"0px"}, 800,"linear", function() {
                     activerBtns();
                     if(tempoOn===true) {
                         tempo();
@@ -37,7 +36,7 @@ function nextDiapo () {
         else {
             $(this).next('div').show(function() {
                 imageSlide();
-                $(this).animate({marginLeft:"0px"},800,"linear", function() {
+                $(this).animate({marginLeft:"0px"}, 800,"linear", function() {
                     activerBtns();
                     if(tempoOn===true) {
                         tempo();
@@ -57,7 +56,7 @@ function prevDiapo () {
         if(($(this).is('#sliderRow > div:first-child'))) {
             $('#slide6').show(function() {
                 imageSlide();
-                $(this).animate({marginLeft:"0px"},800,"linear", function() {
+                $(this).animate({marginLeft:"0px"}, 800,"linear", function() {
                     activerBtns();
                     if(tempoOn===true) {
                         tempo();
@@ -69,7 +68,7 @@ function prevDiapo () {
         else {
             $(this).prev('div').show(function() {
                 imageSlide();
-                $(this).animate({marginLeft:"0px"},800,"linear", function() {
+                $(this).animate({marginLeft:"0px"}, 800,"linear", function() {
                     activerBtns();
                     if(tempoOn===true) {
                         tempo();
@@ -109,7 +108,7 @@ for (let i=0 ; i < slides.length ; i++) {
         $('#sliderRow > div:visible').animate({marginLeft:"-3500"}, 800,"linear", function() {
             $(slides[i]).show(function() {
                 imageSlide();
-                $(slides[i]).animate({marginLeft:"0px"},800,"linear", function() {
+                $(slides[i]).animate({marginLeft:"0px"}, 800,"linear", function() {
                     activerBtns();
                     if(tempoOn===true) {
                         tempo();
@@ -131,94 +130,143 @@ function imageSlide() {
     }
 }
 
+                                                                            /* CARTE */
 
-
-
-
-                                                                            /* APPEL JCDECAUX et INITIALISATION DE LA CARTE */
-
-    $(function () {
-        $.getJSON('https://api.jcdecaux.com/vls/v3/stations?contract=brisbane&apiKey=' + apiKey, function(data, status) {
-            console.log(status);    
-
-            // initialisation de la carte
-            macarte = L.map('carte').setView([data[0].position.latitude, data[0].position.longitude], 13);
-            
-
-            // Chargement des tuiles
-            L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-                attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
-                maxZoom: 18,
-                minZoom: 12,
-                /*id: 'mapbox.streets',
-                accessToken: 'your.mapbox.access.token'*/
-            }).addTo(macarte);
-
-            tempoRefesh();
-                    
-        });
-    });
-
-                                                                            /* ACTUALISATION DE LA CARTE */
-
-
-    let intervalActualisation
-    function tempoRefesh() {
+    let intervalActualisation;
+    function tempoRefresh() {
         refresh();
         intervalActualisation = setInterval(refresh,60000);
     }
 
-    function refresh () {
-        $.getJSON("https://api.jcdecaux.com/vls/v3/stations?contract=brisbane&apiKey=" + apiKey, function(stations) {
+    tempoRefresh();
 
-            // Personnalisation du marqueur
-            let icone = L.icon({
-                iconUrl: "img/icon_marqueurs.png",
+
+    // initialisation de la carte
+    macarte = L.map('carte').setView([-27.482279, 153.028723], 13);
+            
+    // Chargement des tuiles
+    L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+        attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+        maxZoom: 18,
+        minZoom: 13,
+        /*id: 'mapbox.streets',
+        accessToken: 'your.mapbox.access.token'*/
+    }).addTo(macarte);
+
+    let marqueurs = L.markerClusterGroup({disableClusteringAtZoom: 16});
+
+    function refresh () {
+        $.getJSON("https://api.jcdecaux.com/vls/v3/stations?contract=brisbane&apiKey=" + apiKey, function(stations, status) {
+
+            console.log("Status de l'appel JCDecaux : " + status);    
+
+            // Personnalisation des marqueurs
+            let iconeOpen = L.icon({
+                iconUrl: "img/icon_marqueurs_open.png",
                 iconSize: [40, 40],
                 icon: [25, 50],
-                popupAnchor: [0, -10]
+                popupAnchor: [0, -15]
             })
-
-            //On ajoute les marqueurs par station
+            let iconeClose = L.icon({
+                iconUrl: "img/icon_marqueurs_close.png",
+                iconSize: [40, 40],
+                icon: [25, 50],
+                popupAnchor: [0, -15]
+            })
+            let iconeOnlyBike = L.icon({
+                iconUrl: "img/icon_marqueurs_bike.png",
+                iconSize: [40, 40],
+                icon: [25, 50],
+                popupAnchor: [0, -15]
+            })
+            let iconeOnlyStand = L.icon({
+                iconUrl: "img/icon_marqueurs_stand.png",
+                iconSize: [40, 40],
+                icon: [25, 50],
+                popupAnchor: [0, -15]
+            })
+            
+            macarte.removeLayer(marqueurs); // On suprimme les précédents marqueurs avant d'actualiser par les nouveaux
+            // On ajoute les marqueurs par station
             for (station of stations) {
-               // Nous ajoutons un marqueur
-               let marqueur = L.marker([station.position.latitude, station.position.longitude], {icon: icone}).addTo(macarte);
+               // Nous ajoutons les marqueurs en fonctions de leurs status
+               let marqueur = "";
+                if((station.status === "OPEN") && (station.totalStands.availabilities.bikes >= 1) && (station.totalStands.availabilities.stands >= 1)) {
+                    marqueur = L.marker([station.position.latitude, station.position.longitude], {icon: iconeOpen})//.addTo(macarte); inutiles lors de l'utilisation des clusters
+                }
+                else if((station.status === "OPEN") && (station.totalStands.availabilities.bikes >= 1) && (station.totalStands.availabilities.stands <= 0)) {
+                    marqueur = L.marker([station.position.latitude, station.position.longitude], {icon: iconeOnlyBike})//.addTo(macarte);
+                }
+                else if((station.status === "OPEN") && (station.totalStands.availabilities.bikes <= 0) && (station.totalStands.availabilities.stands >= 1)) {
+                    marqueur = L.marker([station.position.latitude, station.position.longitude], {icon: iconeOnlyStand})//.addTo(macarte);
+                }
+                else {
+                    marqueur = L.marker([station.position.latitude, station.position.longitude], {icon: iconeClose})//.addTo(macarte);
+                }
 
-               if (station.status === "OPEN") {
-
-                    //On défini le texte de la popup
+                // On règle les popups
+                if (station.status === "OPEN") {
+                    // On défini le texte de la popup
                     let htmlPopup = (
                         "<p> <span class=mentions>Adresse:</span> " + station.address + "<p>" + 
                         "<p> <span class=mentions>Vélos disponibles:</span> " + station.totalStands.availabilities.bikes + "<p>" +
                         "<p> <span class=mentions>Places libres:</span> " + station.totalStands.availabilities.stands + "<p>" +
-                        "<button class=reserver> Réserver </button>"
+                        "<button class=btnSub> Réserver </button>"
                     );
                     
-                    //On défini la classe de la popup
+                    // On défini la classe de la popup
                     let optionsPopup = {'className' : 'stOpen'};
                     
-                    //On ajoute la popup au marqueur
+                    // On ajoute la popup au marqueur
                     marqueur.bindPopup(htmlPopup, optionsPopup);
+                    marqueurs.addLayer(marqueur); // On ajoute le marqueur au layer qui correspond au cluster
                 }
-
-               else {
-                    //On défini le texte de la popup
+                else {
+                    // On défini le texte de la popup
                     let htmlPopup = (
                         "<p> <span class=mentions>Station fermée</span> <p>" + 
                         "<p> <span class=mentions>Adresse:</span> " + station.address + "<p>"
                     );
                 
-                    //On défini la classe de la popup
+                    // On défini la classe de la popup
                     let optionsPopup = {'className' : 'stClose'};
                 
-                    //On ajoute la popup au marqueur
+                    // On ajoute la popup au marqueur
                     marqueur.bindPopup(htmlPopup, optionsPopup);
-               }
-
-             }
-
+                    marqueurs.addLayer(marqueur); // On ajoute le marqueur au layer qui correspond au cluster
+                }
+            }
+            macarte.addLayer(marqueurs);
         });
     };
+
+
+
+
+
+/////////////////////////////////////////////////CODE OBJET///////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -268,3 +316,34 @@ function transferSlide() {
     $('#sliderRow').find("div:last").after($('#sliderRow').find("div:first"));
 }
 */
+
+
+
+
+
+
+                                                                            /* APPEL JCDECAUX et INITIALISATION DE LA CARTE */
+/*
+    //$(function () {
+        $.getJSON('https://api.jcdecaux.com/vls/v3/stations?contract=brisbane&apiKey=' + apiKey, function(data, status) {
+            console.log(status);    
+
+            // initialisation de la carte
+            macarte = L.map('carte').setView([data[0].position.latitude, data[0].position.longitude], 13);
+            
+
+            // Chargement des tuiles
+            L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+                maxZoom: 18,
+                minZoom: 12,
+                /*id: 'mapbox.streets',
+                accessToken: 'your.mapbox.access.token'    * /
+            }).addTo(macarte);
+
+            let marqueurs = L.markerClusterGroup();
+
+            tempoRefesh();
+                    
+        });
+    //});*/

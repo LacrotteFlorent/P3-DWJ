@@ -8,8 +8,8 @@ body {
 }
 
 [class*="col-"], footer {
-    background-color: rgba(76, 175, 80, 0.3);
-    border: 2px solid black;
+    background-color: /* rgba(76, 175, 80, 0.3)*/ transparent;
+    border: /*2px solid black*/ none;
     border-radius: 0px;
     line-height: 40px;
     text-align: center;
@@ -81,10 +81,6 @@ body {
     color: #494E51;
     overflow-x: hidden;
 }
-
-
-
-
 
                                                                                                                 /* Header */
 
@@ -181,14 +177,21 @@ header {
 
 
                                                                                                                 /* Sous Section 1 */
+
 #sousSection1 {
     min-height: 100vh;
-    background-image: url("../img/mainImg.jpg");
+    background-image: url("../img/brisbane2.jpg");
     background-position: center;
     background-size: cover;
+    box-shadow: 8px 8px 12px #333;
+    z-index: 10;
 }
 
+                                                                                                                /* Sous Section 2 */
 
+#sousSection2 {
+    z-index: 9;
+}
 
 
                                                                                                                 /* Slider */
@@ -207,10 +210,6 @@ header {
 .blocSlide {
     border-radius: 10px;
     background-color: #F7BE03;
-}
-
-.blocInvisible{
-
 }
 
 .startHidden {
@@ -247,11 +246,14 @@ header {
     align-items: center;
 }
 #boutonsAutreSlide button {
-    margin-left: 20px;
+    margin-right: 20px;
     background: transparent;
     border: none;
 }
-
+ .fa-circle, .fa-step-backward, .fa-play, .fa-pause, .fa-step-forward  {
+    color: white;
+    font-size: 1.6em;
+ }
 
 
                                                                                                               /* Carte */
@@ -276,13 +278,22 @@ header {
 }
 
 /* Popup station ouverte */
-.stOpen .leaflet-popup-content-wrapper, .custom .leaflet-popup-tip {
-    background-color: cornsilk;
+.stOpen .leaflet-popup-content-wrapper, .stOpen .leaflet-popup-tip-container .leaflet-popup-tip {
+    background-color: white;
     color: #333;
 }
 
 /* Popup station fermée */
-.stClose .leaflet-popup-content-wrapper, .custom .leaflet-popup-tip {
+.stClose .leaflet-popup-content-wrapper, .stClose .leaflet-popup-tip-container .leaflet-popup-tip {
     background-color: #952e28;
     color:cornsilk;
+}
+
+/* Bouton réserver */
+.btnSub {
+    font-weight: bold;
+    border: 5px double darkred;
+    border-radius: 15px;
+    background-color: transparent;
+    color: #333;
 }
