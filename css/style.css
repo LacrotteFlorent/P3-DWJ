@@ -251,6 +251,7 @@ header {
 
                                                                                                                /* Boutons slider */
 
+                                                                                                               
 /* Boutons diapo */
 #boutonsDiapo button {
     border: none;
@@ -307,7 +308,7 @@ header {
     color:cornsilk;
 }
 
-/* Bouton réserver */
+/* Bouton réserver Popup */
 .btnSub {
     font-weight: bold;
     border: 5px double darkred;
@@ -316,8 +317,30 @@ header {
     color: #333;
 }
 
+/* Encart Description */
+#infoStation div {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    line-height: 20px;
+}
+#infoStation > p {
+    margin-top: 20px;
+}
 
-                                                                                                              /* Carte */
+#reservation {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    line-height: 20px;
+}
+
+
+                                                                                                              /* Pied de page */
 
 
 footer {

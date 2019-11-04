@@ -133,6 +133,217 @@ function imageSlide() {
 
 
                                                                             /* CARTE */
+
+
+    let intervalActualisation;
+
+    (function () {      //Fonction auto invoquée
+        refresh();
+        intervalActualisation = setInterval(refresh,60000);
+    })();
+
+    // initialisation de la carte
+    macarte = L.map('carte').setView([-27.482279, 153.028723], 13);
+            
+    // Chargement des tuiles
+    L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+        attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+        maxZoom: 18,
+        minZoom: 13,
+    }).addTo(macarte);
+
+    let marqueurs = L.markerClusterGroup({disableClusteringAtZoom: 16});
+
+    class Station {
+
+        marqueur;
+        etatOpen;
+        etatClose;
+        etatNotBike;
+        etatNotStands;
+
+        constructor(adresse, status, nbVelo, nbPlace, latitude, longitude) {
+            this.adresse = adresse;
+            this.status = status;
+            this.nbVelo = nbVelo;
+            this.nbPlace = nbPlace;
+            this.latitude = latitude;
+            this.longitude = longitude;
+        }
+
+        afficheDetail () {
+            console.log(this.adresse);
+            console.log(this.status);
+            console.log(this.nbVelo);
+            console.log(this.nbPlace);
+            console.log(this.longitude);
+            console.log(this.latitude);
+        }
+    
+        genererMarqueur () {
+            // On change l'icone du marqueur en fonction des données de la station
+            let iconeOpen = L.icon({
+                iconUrl: "img/icon_marqueurs_open_2.png",
+                iconSize: [40, 40],
+                icon: [25, 50],
+                popupAnchor: [0, -15]
+            })
+            let iconeClose = L.icon({
+                iconUrl: "img/icon_marqueurs_close_2.png",
+                iconSize: [40, 40],
+                icon: [25, 50],
+                popupAnchor: [0, -15]
+            })
+            let iconeOnlyBike = L.icon({
+                iconUrl: "img/icon_marqueurs_bike_2.png",
+                iconSize: [40, 40],
+                icon: [25, 50],
+                popupAnchor: [0, -15]
+            })
+            let iconeOnlyStand = L.icon({
+                iconUrl: "img/icon_marqueurs_stand_2.png",
+                iconSize: [40, 40],
+                icon: [25, 50],
+                popupAnchor: [0, -15]
+            })
+
+            if((this.status === "OPEN") && (this.nbVelo >= 1) && (this.nbPlace >= 1)) {
+                this.marqueur = L.marker([this.latitude, this.longitude], {icon: iconeOpen})
+            }
+            else if((this.status === "OPEN") && (this.nbVelo >= 1) && (this.nbPlace <= 0)) {
+                this.marqueur = L.marker([this.latitude, this.longitude], {icon: iconeOnlyBike})
+            }
+            else if((this.status === "OPEN") && (this.nbVelo <= 0) && (this.nbPlace >= 1)) {
+                this.marqueur = L.marker([this.latitude, this.longitude], {icon: iconeOnlyStand})
+            }
+            else {
+                this.marqueur = L.marker([this.latitude, this.longitude], {icon: iconeClose})
+            }
+        }
+    
+        genererPopup () {
+            // On affiche les popup en fonction du status de la station
+            if (this.status === "OPEN") {   // Si la station à le status ouvert
+                // On défini le texte de la popup
+                let htmlPopup = (
+                    "<p> <span class=mentions>Adresse:</span> " + this.adresse + "<p>" + 
+                    "<p> <span class=mentions>Vélos disponibles:</span> " + this.nbVelo + "<p>" +
+                    "<p> <span class=mentions>Places libres:</span> " + this.nbPlace + "<p>" +
+                    "<button class=btnSub> Réserver </button>"
+                );
+                
+                // On défini la classe de la popup
+                let optionsPopup = {'className' : 'stOpen'};
+                
+                // On ajoute la popup au marqueur
+                this.marqueur.bindPopup(htmlPopup, optionsPopup);
+                
+                
+            }
+            else {                          // Si la station à le status fermé
+                // On défini le texte de la popup
+                let htmlPopup = (
+                    "<p> <span class=mentions>Station fermée</span> <p>" + 
+                    "<p> <span class=mentions>Adresse:</span> " + this.adresse + "<p>"
+                );
+    
+                // On défini la classe de la popup
+                let optionsPopup = {'className' : 'stClose'};
+    
+                // On ajoute la popup au marqueur
+                this.marqueur.bindPopup(htmlPopup, optionsPopup);
+            }
+        }
+
+        boutonPopupReservation () {
+            // Implémentation du click du bouton réservation
+            $(this.marqueur).on('click', function() {
+                $('.btnSub').on('click', function() {
+                    console.log('click');
+                    const description = new Description(this.adresse, this.status, this.nbVelo, this.nbPlace, this.latitude, this.longitude);
+                    description.afficherDescription();
+                    console.log(this.adresse);
+                }.bind(this));
+            }.bind(this));
+        }
+    
+    }
+
+    class Description {
+
+        constructor(adresse, status, nbVelo, nbPlace, latitude, longitude) {
+            this.adresse = adresse;
+            this.status = status;
+            this.nbVelo = nbVelo;
+            this.nbPlace = nbPlace;
+            this.latitude = latitude;
+            this.longitude = longitude;
+        }
+
+        afficherDescription () {
+            $('#adresseDescription').text(" " + this.adresse);
+            $('#etatDescription').text(" " + this.status);
+            $('#veloDescription').text(" " + this.nbVelo);
+            $('#placeDescription').text(" " + this.nbPlace);
+            $('#coordonneeDescription').text('Lat. ' + this.latitude + ' , Long. ' + this.longitude);
+            $("#informations").removeClass("d-none").addClass("d-block col-lg-3");
+            $("#carte").removeClass("col-lg-12").addClass("col-lg-9");
+        }
+
+        boutonDescriptionReservation () {
+
+        }
+
+
+    }
+
+
+function refresh () {
+    $.getJSON("https://api.jcdecaux.com/vls/v3/stations?contract=brisbane&apiKey=" + apiKey, function(stations, status) {
+
+        console.log("Status de l'appel JCDecaux : " + status);    
+
+        marqueurs.clearLayers();
+        
+        for (station of stations) {
+            const stationVelilov = new Station(station.address, station.status, station.totalStands.availabilities.bikes, station.totalStands.availabilities.stands, station.position.latitude, station.position.longitude);
+            stationVelilov.genererMarqueur();
+            //stationVelilov.afficheDetail();
+            stationVelilov.genererPopup();
+            marqueurs.addLayer(stationVelilov.marqueur);
+            stationVelilov.boutonPopupReservation();
+        }
+        macarte.addLayer(marqueurs);
+        console.log(stations.length);
+    });
+};
+
+
+//refresh();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////ESSAIS///////////////////////////////////////////
+
+
+
+
+
+
+
+
+//////////////////// CARTE fonctionelle en procédurale /////////////////////////////////////////////////////
 /*
     let intervalActualisation;
     function tempoRefresh() {
@@ -252,165 +463,8 @@ function imageSlide() {
     });
 
 */
-/////////////////////////////////////////////////CODE OBJET///////////////////////////////////////////
 
-let intervalActualisation;
-    function tempoRefresh() {
-        refresh();
-        intervalActualisation = setInterval(refresh,60000);
-    }
-
-    //tempoRefresh();
-    // initialisation de la carte
-    macarte = L.map('carte').setView([-27.482279, 153.028723], 13);
-            
-    // Chargement des tuiles
-    L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-        attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
-        maxZoom: 18,
-        minZoom: 13,
-    }).addTo(macarte);
-
-    let marqueurs = L.markerClusterGroup({disableClusteringAtZoom: 16});
-
-    class Station {
-
-        marqueur;
-
-        constructor(adresse, status, nbVelo, nbPlace, latitude, longitude) {
-            this.adresse = adresse;
-            this.status = status;
-            this.nbVelo = nbVelo;
-            this.nbPlace = nbPlace;
-            this.latitude = latitude;
-            this.longitude = longitude;
-        }
-
-        afficheDetail () {
-            console.log(this.adresse);
-            console.log(this.status);
-            console.log(this.nbVelo);
-            console.log(this.nbPlace);
-            console.log(this.longitude);
-            console.log(this.latitude);
-        }
-    
-        genererMarqueur () {
-            // On change l'icone du marqueur en fonction des données de la station
-            let iconeOpen = L.icon({
-                iconUrl: "img/icon_marqueurs_open_2.png",
-                iconSize: [40, 40],
-                icon: [25, 50],
-                popupAnchor: [0, -15]
-            })
-            let iconeClose = L.icon({
-                iconUrl: "img/icon_marqueurs_close_2.png",
-                iconSize: [40, 40],
-                icon: [25, 50],
-                popupAnchor: [0, -15]
-            })
-            let iconeOnlyBike = L.icon({
-                iconUrl: "img/icon_marqueurs_bike_2.png",
-                iconSize: [40, 40],
-                icon: [25, 50],
-                popupAnchor: [0, -15]
-            })
-            let iconeOnlyStand = L.icon({
-                iconUrl: "img/icon_marqueurs_stand_2.png",
-                iconSize: [40, 40],
-                icon: [25, 50],
-                popupAnchor: [0, -15]
-            })
-
-            if((this.status === "OPEN") && (this.nbVelo >= 1) && (this.nbPlace >= 1)) {
-                this.marqueur = L.marker([this.latitude, this.longitude], {icon: iconeOpen})
-            }
-            else if((this.status === "OPEN") && (this.nbVelo >= 1) && (this.nbPlace <= 0)) {
-                this.marqueur = L.marker([this.latitude, this.longitude], {icon: iconeOnlyBike})
-            }
-            else if((this.status === "OPEN") && (this.nbVelo <= 0) && (this.nbPlace >= 1)) {
-                this.marqueur = L.marker([this.latitude, this.longitude], {icon: iconeOnlyStand})
-            }
-            else {
-                this.marqueur = L.marker([this.latitude, this.longitude], {icon: iconeClose})
-            }
-        }
-    
-        genererPopup () {
-            // On affiche les popup en fonction du status de la station
-            if (this.status === "OPEN") {   // Si la station à le status ouvert
-                // On défini le texte de la popup
-                let htmlPopup = (
-                    "<p> <span class=mentions>Adresse:</span> " + this.adresse + "<p>" + 
-                    "<p> <span class=mentions>Vélos disponibles:</span> " + this.nbVelo + "<p>" +
-                    "<p> <span class=mentions>Places libres:</span> " + this.nbPlace + "<p>" +
-                    "<button class=btnSub> Réserver </button>"
-                );
-                
-                // On défini la classe de la popup
-                let optionsPopup = {'className' : 'stOpen'};
-                
-                // On ajoute la popup au marqueur
-                this.marqueur.bindPopup(htmlPopup, optionsPopup);
-            }
-            else {                          // Si la station à le status fermé
-                // On défini le texte de la popup
-                let htmlPopup = (
-                    "<p> <span class=mentions>Station fermée</span> <p>" + 
-                    "<p> <span class=mentions>Adresse:</span> " + station.adresse + "<p>"
-                );
-    
-                // On défini la classe de la popup
-                let optionsPopup = {'className' : 'stClose'};
-    
-                // On ajoute la popup au marqueur
-                this.marqueur.bindPopup(htmlPopup, optionsPopup);
-            }
-        }
-    
-    }
-
-
-function refresh () {
-    $.getJSON("https://api.jcdecaux.com/vls/v3/stations?contract=brisbane&apiKey=" + apiKey, function(stations, status) {
-
-        console.log("Status de l'appel JCDecaux : " + status);    
-
-        marqueurs.clearLayers();
-        
-        for (station of stations) {
-            const stationVelilov = new Station(station.address, station.status, station.totalStands.availabilities.bikes, station.totalStands.availabilities.stands, station.position.latitude, station.position.longitude);
-            stationVelilov.genererMarqueur();
-            //stationVelilov.afficheDetail();
-            stationVelilov.genererPopup();
-            marqueurs.addLayer(stationVelilov.marqueur);
-        }
-        macarte.addLayer(marqueurs);
-
-    });
-};
-
-
-refresh();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/////////////////////////////////////////////////ESSAIS///////////////////////////////////////////
-
-
-
-
+/////////////////////////////////////////////////////////////////slider/////////////////////////////////////////////////////////////
 
 
 /*
