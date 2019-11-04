@@ -251,7 +251,7 @@ header {
 
                                                                                                                /* Boutons slider */
 
-                                                                                                               
+
 /* Boutons diapo */
 #boutonsDiapo button {
     border: none;
@@ -327,16 +327,37 @@ header {
     line-height: 20px;
 }
 #infoStation > p {
-    margin-top: 20px;
+    margin-top: -10px;
 }
 
 #reservation {
+    line-height: 20px !important;
+}
+#formulaireReservation {
     display: flex;
     flex-direction: row;
     text-align: center;
     justify-content: center;
     flex-wrap: wrap;
-    line-height: 20px;
+}
+
+#fermerReservation {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.fa-times {
+    font-size: 2em;
+}
+
+.fa-times:hover {
+    color: #952e28;
+}
+
+#canvas {
+    width: 150px;
+    height: 150px;
 }
 
 

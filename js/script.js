@@ -157,10 +157,7 @@ function imageSlide() {
     class Station {
 
         marqueur;
-        etatOpen;
-        etatClose;
-        etatNotBike;
-        etatNotStands;
+        statusDetail;
 
         constructor(adresse, status, nbVelo, nbPlace, latitude, longitude) {
             this.adresse = adresse;
@@ -169,6 +166,20 @@ function imageSlide() {
             this.nbPlace = nbPlace;
             this.latitude = latitude;
             this.longitude = longitude;
+
+            // On génere les états
+            if((this.status === "OPEN") && (this.nbVelo >= 1) && (this.nbPlace >= 1)) {
+                this.statusDetail = "OPEN";
+            }
+            else if((this.status === "OPEN") && (this.nbVelo >= 1) && (this.nbPlace <= 0)) {
+                this.statusDetail = "NOTSTAND";
+            }
+            else if((this.status === "OPEN") && (this.nbVelo <= 0) && (this.nbPlace >= 1)) {
+                this.statusDetail = "NOTBIKE";
+            }
+            else {
+                this.statusDetail = "CLOSE";
+            }
         }
 
         afficheDetail () {
@@ -181,7 +192,7 @@ function imageSlide() {
         }
     
         genererMarqueur () {
-            // On change l'icone du marqueur en fonction des données de la station
+            //On prédéfini plusieurs marqueurs
             let iconeOpen = L.icon({
                 iconUrl: "img/icon_marqueurs_open_2.png",
                 iconSize: [40, 40],
@@ -206,14 +217,14 @@ function imageSlide() {
                 icon: [25, 50],
                 popupAnchor: [0, -15]
             })
-
-            if((this.status === "OPEN") && (this.nbVelo >= 1) && (this.nbPlace >= 1)) {
+            // On change l'icone du marqueur en fonction des données de la station
+            if (this.statusDetail === "OPEN") {
                 this.marqueur = L.marker([this.latitude, this.longitude], {icon: iconeOpen})
             }
-            else if((this.status === "OPEN") && (this.nbVelo >= 1) && (this.nbPlace <= 0)) {
+            else if (this.statusDetail === "NOTSTAND") {
                 this.marqueur = L.marker([this.latitude, this.longitude], {icon: iconeOnlyBike})
             }
-            else if((this.status === "OPEN") && (this.nbVelo <= 0) && (this.nbPlace >= 1)) {
+            else if (this.statusDetail === "NOTBIKE") {
                 this.marqueur = L.marker([this.latitude, this.longitude], {icon: iconeOnlyStand})
             }
             else {
@@ -260,7 +271,7 @@ function imageSlide() {
             $(this.marqueur).on('click', function() {
                 $('.btnSub').on('click', function() {
                     console.log('click');
-                    const description = new Description(this.adresse, this.status, this.nbVelo, this.nbPlace, this.latitude, this.longitude);
+                    const description = new Description(this.adresse, this.statusDetail, this.nbVelo, this.nbPlace, this.latitude, this.longitude);
                     description.afficherDescription();
                     console.log(this.adresse);
                 }.bind(this));
@@ -271,9 +282,9 @@ function imageSlide() {
 
     class Description {
 
-        constructor(adresse, status, nbVelo, nbPlace, latitude, longitude) {
+        constructor(adresse, statusDetail, nbVelo, nbPlace, latitude, longitude) {
             this.adresse = adresse;
-            this.status = status;
+            this.statusDetail = statusDetail;
             this.nbVelo = nbVelo;
             this.nbPlace = nbPlace;
             this.latitude = latitude;
@@ -281,13 +292,20 @@ function imageSlide() {
         }
 
         afficherDescription () {
+            //affiche l'encart description avec les éléments de la station
             $('#adresseDescription').text(" " + this.adresse);
-            $('#etatDescription').text(" " + this.status);
+            $('#etatDescription').text(" " + this.statusDetail);
             $('#veloDescription').text(" " + this.nbVelo);
             $('#placeDescription').text(" " + this.nbPlace);
             $('#coordonneeDescription').text('Lat. ' + this.latitude + ' , Long. ' + this.longitude);
             $("#informations").removeClass("d-none").addClass("d-block col-lg-3");
             $("#carte").removeClass("col-lg-12").addClass("col-lg-9");
+
+            //ferme l'encart description
+            $('#fermerReservation').on('click', function() {
+                $("#carte").removeClass("col-lg-9").addClass("col-lg-12");
+                $("#informations").removeClass("d-block col-lg-3").addClass("d-none");
+            });
         }
 
         boutonDescriptionReservation () {
