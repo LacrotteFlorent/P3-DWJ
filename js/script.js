@@ -154,7 +154,7 @@ function imageSlide() {
 
     let marqueurs = L.markerClusterGroup({disableClusteringAtZoom: 16});
 
-    class Station {
+    class Station {                         // Classe Station //
 
         marqueur;
         statusDetail;
@@ -167,6 +167,13 @@ function imageSlide() {
             this.latitude = latitude;
             this.longitude = longitude;
 
+            this.genererEtats();
+            this.genererMarqueur();
+            this.genererPopup();
+            this.boutonPopupReservation();            
+        }
+
+        genererEtats () {
             // On génere les états
             if((this.status === "OPEN") && (this.nbVelo >= 1) && (this.nbPlace >= 1)) {
                 this.statusDetail = "OPEN";
@@ -270,7 +277,7 @@ function imageSlide() {
             // Implémentation du click du bouton réservation
             $(this.marqueur).on('click', function() {
                 $('.btnSub').on('click', function() {
-                    console.log('click');
+                    console.log('Vous avez cliqué sur le bouton réservation de la station :');
                     const description = new Description(this.adresse, this.statusDetail, this.nbVelo, this.nbPlace, this.latitude, this.longitude);
                     description.afficherDescription();
                     console.log(this.adresse);
@@ -280,8 +287,9 @@ function imageSlide() {
     
     }
 
-    class Description {
+    class Description {                                 // Classe Description //
 
+        
         constructor(adresse, statusDetail, nbVelo, nbPlace, latitude, longitude) {
             this.adresse = adresse;
             this.statusDetail = statusDetail;
@@ -289,6 +297,8 @@ function imageSlide() {
             this.nbPlace = nbPlace;
             this.latitude = latitude;
             this.longitude = longitude;
+            let canvas = new Canvas;
+            canvas.initCanvas();
         }
 
         afficherDescription () {
@@ -315,6 +325,29 @@ function imageSlide() {
 
     }
 
+    class Canvas {
+        constructor() {
+            this.canvas = $('#canvas');
+            this.context = canvas.getContext('2d');
+            this.initCanvas();
+            this.dessinerCanvas();
+            this.nettoyerCanvas();
+        }
+
+        initCanvas() {
+            this.context.fillStyle = "gold";
+            this.context.fillRect(0, 0, 300, 300);
+        }
+
+        dessinerCanvas() {
+            console.log("dessin");
+        }
+
+        nettoyerCanvas() {
+            console.log("nettoyage");
+        }
+    }
+
 
 function refresh () {
     $.getJSON("https://api.jcdecaux.com/vls/v3/stations?contract=brisbane&apiKey=" + apiKey, function(stations, status) {
@@ -325,22 +358,14 @@ function refresh () {
         
         for (station of stations) {
             const stationVelilov = new Station(station.address, station.status, station.totalStands.availabilities.bikes, station.totalStands.availabilities.stands, station.position.latitude, station.position.longitude);
-            stationVelilov.genererMarqueur();
             //stationVelilov.afficheDetail();
-            stationVelilov.genererPopup();
             marqueurs.addLayer(stationVelilov.marqueur);
-            stationVelilov.boutonPopupReservation();
         }
+
         macarte.addLayer(marqueurs);
-        console.log(stations.length);
+        console.log("Nombre total de stations : " + stations.length);
     });
 };
-
-
-//refresh();
-
-
-
 
 
 

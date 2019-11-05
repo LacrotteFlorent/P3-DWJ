@@ -19,10 +19,6 @@ body {
     height: auto;
 }
 
-#infoReservation {
-    height: 50px;
-}
-
 #sectionSlider {
     height: 800px;
 }
@@ -31,17 +27,6 @@ body {
     height: 800px;
 }
 
-#informations {
-    height: 800px;
-}
-
-#infoStation {
-    height: 400px;
-}
-
-#reservation {
-    height: 400px;
-}
 
 #bouton {
     height: 50px;
@@ -54,14 +39,6 @@ body {
 #boutonsDiapo {
     height: 50px;
 }
-
-#reservation {
-    align-content: center;
-    align-items: center;
-    justify-content: center;
-}
-
-
 
 
 
@@ -318,6 +295,10 @@ header {
 }
 
 /* Encart Description */
+#informations {
+    height: 800px;
+}
+
 #infoStation div {
     display: flex;
     flex-direction: row;
@@ -330,9 +311,21 @@ header {
     margin-top: -10px;
 }
 
+#infoStation {
+    height: 300px;
+}
+
+#reservation {
+    height: 500px;
+}
+
 #reservation {
     line-height: 20px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
 #formulaireReservation {
     display: flex;
     flex-direction: row;
@@ -358,6 +351,17 @@ header {
 #canvas {
     width: 150px;
     height: 150px;
+    border: 2px solid black;
+}
+
+#bouttonReservationDescription {
+    margin-top: 20px;
+    font-weight: bold;
+    border: 5px double darkred;
+    border-radius: 15px;
+    background-color: transparent;
+    color: #333;
+    padding-bottom: 3px;
 }
 
 
