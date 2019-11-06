@@ -297,8 +297,8 @@ function imageSlide() {
             this.nbPlace = nbPlace;
             this.latitude = latitude;
             this.longitude = longitude;
-            let canvas = new Canvas;
-            canvas.initCanvas();
+            
+            
         }
 
         afficherDescription () {
@@ -310,6 +310,9 @@ function imageSlide() {
             $('#coordonneeDescription').text('Lat. ' + this.latitude + ' , Long. ' + this.longitude);
             $("#informations").removeClass("d-none").addClass("d-block col-lg-3");
             $("#carte").removeClass("col-lg-12").addClass("col-lg-9");
+
+            let canvas = new Canvas;
+            canvas.initCanvas(); // ATTENTION on initialise le canvas une fois l'element visible (sinon .offset ne fonctionne pas !)
 
             //ferme l'encart description
             $('#fermerReservation').on('click', function() {
@@ -325,27 +328,154 @@ function imageSlide() {
 
     }
 
-    class Canvas {
+    class Canvas {                                      // Classe Canvas //
+
+
         constructor() {
             this.canvas = $('#canvas');
+            this.canvasPos = $('#canvas').offset();
             this.context = canvas.getContext('2d');
+            this.pressed;
+            this.curX;
+            this.curY;
+            this.clicX = new Array();
+            this.clicY = new Array();
+            this.clicDessin = new Array();
             this.initCanvas();
-            this.dessinerCanvas();
+            this.boutonPress();
+            this.posMouse();
+            this.ajouterClic();
             this.nettoyerCanvas();
         }
 
+        // A l'apppuis du bouton de la souris dans le canvas on change la variable pressed
+        boutonPress () {
+            $('#canvas').mousedown (function(){
+                this.clicX.push(this.curX); // On ajoute un click au tableau avec la variable clicDessin = False pour commencer une nouvelle ligne
+                this.clicY.push(this.curY);
+                this.clicDessin.push(false);
+                this.pressed = true;
+            }.bind(this));
+
+            $('body').mouseup (function() {
+                this.pressed = false;
+            }.bind(this));
+        }
+
+        // On initialise le canvas en créant un rectangle blanc
         initCanvas() {
-            this.context.fillStyle = "gold";
+            this.context.fillStyle = "white";
             this.context.fillRect(0, 0, 300, 300);
+            //this.pressed = false;
         }
 
-        dessinerCanvas() {
-            console.log("dessin");
+        // On récupere la position du cuseur quand il est dans le canvas
+        posMouse() {
+            $('#canvas').mouseenter().mousemove(function(e) {
+                this.curX = (e.pageX) - (this.canvasPos.left);
+                this.curY = (e.pageY) - (this.canvasPos.top);
+            }.bind(this));
         }
 
+        // On ajoute des points dans un tableau
+        ajouterClic () {  
+            $('#canvas').mousemove (function() {
+                if(this.pressed === true) {
+                    this.clicX.push(this.curX);
+                    this.clicY.push(this.curY);
+                    this.clicDessin.push(true);
+                    this.redessine();
+                }
+            }.bind(this));
+        }
+
+        // On remet le canvas dans la position initiale et on dessine les points du tableau
+        redessine () { 
+            this.initCanvas();
+
+            this.context.strokeStyle = "#333";
+            this.context.lineJoin = "round";
+            this.context.lineWidth = "5";
+
+            for(let i=0; i< this.clicX.length; i++) {
+                this.context.beginPath();
+
+                if (this.clicDessin[i]) { 
+                    this.context.moveTo(this.clicX[i-1], this.clicY[i-1]);
+                }
+                else {
+                    this.context.moveTo(this.clicX[i]-1, this.clicY[i]);
+                }
+                this.context.lineTo(this.clicX[i], this.clicY[i]);
+                this.context.closePath();
+                this.context.stroke();
+            }
+        }
+
+        // Au clic du bouton, on re-initialise le canvas
         nettoyerCanvas() {
-            console.log("nettoyage");
+            $('#boutonEffacerCanvas').on('click', function() {
+                for (let i=this.clicX.length; i>0; i--) { // On vide le tableau
+                    this.clicX.pop();
+                    this.clicY.pop();
+                    this.clicDessin.pop();
+                }
+                this.initCanvas(); // On réinitialise le canvas
+            }.bind(this));
         }
+
+
+        /*
+
+        // Trace un cercle
+        cercle () {
+            while (this.pressed === true) {
+                this.context.beginPath();
+                this.context.fillStyle = "#FF4422";
+                this.context.moveTo(this.curX, this.curY);
+                this.context.arc(this.curX, this.curY, 5, 0, 2 * Math.PI);
+                this.context.fill();
+            }
+        }
+
+        dessinerCanvas () {
+            $('#canvas').mousemove(function (e) {
+                this.curX = (e.pageX) - (this.canvasPos.left);
+                this.curY = (e.pageY) - (this.canvasPos.top);
+            })
+        }
+
+        
+        // On dessine sur le rectangle initialisé avant
+        dessinerCanvas() {
+            this.context.ligneWidth = "5";
+            this.context.strokeStyle = "black";
+
+            /*function cercle(posX, posY, context) {
+                while (this.pressed === true) {
+                context.beginPath();
+                context.fillStyle = "#FF4422";
+                context.moveTo(posX, posY);
+                context.arc(posX, posY, 5, 0, 2 * Math.PI);
+                context.fill();}
+            }*
+
+            
+            $('#canvas').mousedown(function() {  //////// Faire en sorte que: tant que le bouton de la souris est pressé, on trace des cercles
+                console.log('mouseDown');
+                console.log(this.curX + ' | ' + this.curY);
+                console.log(this.pressed);
+                this.pressed = true;
+                //cercle(this.curX, this.curY, this.context);
+                this.cercle();
+                
+            }.bind(this));
+
+        }
+        */
+
+
+        
     }
 
 

@@ -351,10 +351,11 @@ header {
 #canvas {
     width: 150px;
     height: 150px;
-    border: 2px solid black;
+    border: 5px double #333;
+    border-radius: 10px;
 }
 
-#bouttonReservationDescription {
+#boutonReservationDescription {
     margin-top: 20px;
     font-weight: bold;
     border: 5px double darkred;
@@ -362,6 +363,30 @@ header {
     background-color: transparent;
     color: #333;
     padding-bottom: 3px;
+}
+
+/* bouton effacer */
+#divCanvas {
+    position: relative;
+}
+
+#boutonEffacerCanvas {
+    position: absolute;
+    border: none;/*1px solid #333;*/
+    background: transparent;
+    font-size: 1.2em;
+    border-radius: 100px;
+    left: 0px;
+    top: 40px;
+}
+
+/* bouton effacer logo */
+.fa-eraser {
+    color: #333;
+}
+
+.fa-eraser:hover {
+    color: #952e28;
 }
 
 
