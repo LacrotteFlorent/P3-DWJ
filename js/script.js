@@ -135,26 +135,8 @@ function imageSlide() {
                                                                             /* CARTE */
 
 
-    let intervalActualisation;
 
-    (function () {      //Fonction auto invoquée
-        refresh();
-        intervalActualisation = setInterval(refresh,60000);
-    })();
-
-    // initialisation de la carte
-    macarte = L.map('carte').setView([-27.482279, 153.028723], 13);
-            
-    // Chargement des tuiles
-    L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-        attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
-        maxZoom: 18,
-        minZoom: 13,
-    }).addTo(macarte);
-
-    let marqueurs = L.markerClusterGroup({disableClusteringAtZoom: 16});
-
-    class Station {                         // Classe Station //
+    class Station {                                     // Classe Station //
 
         marqueur;
         statusDetail;
@@ -173,7 +155,7 @@ function imageSlide() {
             this.boutonPopupReservation();            
         }
 
-        genererEtats () {
+        genererEtats() {
             // On génere les états
             if((this.status === "OPEN") && (this.nbVelo >= 1) && (this.nbPlace >= 1)) {
                 this.statusDetail = "OPEN";
@@ -189,7 +171,7 @@ function imageSlide() {
             }
         }
 
-        afficheDetail () {
+        afficheDetail() {
             console.log(this.adresse);
             console.log(this.status);
             console.log(this.nbVelo);
@@ -198,7 +180,7 @@ function imageSlide() {
             console.log(this.latitude);
         }
     
-        genererMarqueur () {
+        genererMarqueur() {
             //On prédéfini plusieurs marqueurs
             let iconeOpen = L.icon({
                 iconUrl: "img/icon_marqueurs_open_2.png",
@@ -239,7 +221,7 @@ function imageSlide() {
             }
         }
     
-        genererPopup () {
+        genererPopup() {
             // On affiche les popup en fonction du status de la station
             if (this.status === "OPEN") {   // Si la station à le status ouvert
                 // On défini le texte de la popup
@@ -255,10 +237,8 @@ function imageSlide() {
                 
                 // On ajoute la popup au marqueur
                 this.marqueur.bindPopup(htmlPopup, optionsPopup);
-                
-                
             }
-            else {                          // Si la station à le status fermé
+            else {  // Si la station à le status fermé
                 // On défini le texte de la popup
                 let htmlPopup = (
                     "<p> <span class=mentions>Station fermée</span> <p>" + 
@@ -273,7 +253,7 @@ function imageSlide() {
             }
         }
 
-        boutonPopupReservation () {
+        boutonPopupReservation() {
             // Implémentation du click du bouton réservation
             $(this.marqueur).on('click', function() {
                 $('.btnSub').on('click', function() {
@@ -284,11 +264,10 @@ function imageSlide() {
                 }.bind(this));
             }.bind(this));
         }
-    
     }
 
-    class Description {                                 // Classe Description //
 
+    class Description {                                 // Classe Description //
         
         constructor(adresse, statusDetail, nbVelo, nbPlace, latitude, longitude) {
             this.adresse = adresse;
@@ -297,11 +276,9 @@ function imageSlide() {
             this.nbPlace = nbPlace;
             this.latitude = latitude;
             this.longitude = longitude;
-            
-            
         }
 
-        afficherDescription () {
+        afficherDescription() {
             //affiche l'encart description avec les éléments de la station
             $('#adresseDescription').text(" " + this.adresse);
             $('#etatDescription').text(" " + this.statusDetail);
@@ -321,15 +298,18 @@ function imageSlide() {
             });
         }
 
-        boutonDescriptionReservation () {
+        boutonDescriptionReservation() {
+
+
+            //On affiche le bouton seulement si on peux réserver !!! => Vélo Dispo et station ouverte !
+            // ON vérifie que la signature est présente et que le formulaire est remplis !
+            // on stocke l'info dans l'API Web Storage
 
         }
-
-
     }
 
-    class Canvas {                                      // Classe Canvas //
 
+    class Canvas {                                      // Classe Canvas //
 
         constructor() {
             this.canvas = $('#canvas');
@@ -348,10 +328,11 @@ function imageSlide() {
             this.nettoyerCanvas();
         }
 
-        // A l'apppuis du bouton de la souris dans le canvas on change la variable pressed
-        boutonPress () {
+        boutonPress() {
+            // A l'apppuis du bouton de la souris dans le canvas on change la variable pressed
+            // On ajoute un click au tableau avec la variable clicDessin = False pour commencer une nouvelle ligne
             $('#canvas').mousedown (function(){
-                this.clicX.push(this.curX); // On ajoute un click au tableau avec la variable clicDessin = False pour commencer une nouvelle ligne
+                this.clicX.push(this.curX);
                 this.clicY.push(this.curY);
                 this.clicDessin.push(false);
                 this.pressed = true;
@@ -361,24 +342,23 @@ function imageSlide() {
                 this.pressed = false;
             }.bind(this));
         }
-
-        // On initialise le canvas en créant un rectangle blanc
+      
         initCanvas() {
+            // On initialise le canvas en créant un rectangle blanc
             this.context.fillStyle = "white";
             this.context.fillRect(0, 0, 300, 300);
-            //this.pressed = false;
         }
-
-        // On récupere la position du cuseur quand il est dans le canvas
+        
         posMouse() {
+            // On récupere la position du cuseur quand il est dans le canvas
             $('#canvas').mouseenter().mousemove(function(e) {
                 this.curX = (e.pageX) - (this.canvasPos.left);
                 this.curY = (e.pageY) - (this.canvasPos.top);
             }.bind(this));
         }
 
-        // On ajoute des points dans un tableau
-        ajouterClic () {  
+        ajouterClic () {
+            // On ajoute des points dans un tableau
             $('#canvas').mousemove (function() {
                 if(this.pressed === true) {
                     this.clicX.push(this.curX);
@@ -389,8 +369,8 @@ function imageSlide() {
             }.bind(this));
         }
 
-        // On remet le canvas dans la position initiale et on dessine les points du tableau
         redessine () { 
+            // On remet le canvas dans la position initiale et on dessine les points du tableau
             this.initCanvas();
 
             this.context.strokeStyle = "#333";
@@ -411,9 +391,9 @@ function imageSlide() {
                 this.context.stroke();
             }
         }
-
-        // Au clic du bouton, on re-initialise le canvas
+        
         nettoyerCanvas() {
+            // Au clic du bouton, on re-initialise le canvas
             $('#boutonEffacerCanvas').on('click', function() {
                 for (let i=this.clicX.length; i>0; i--) { // On vide le tableau
                     this.clicX.pop();
@@ -423,9 +403,142 @@ function imageSlide() {
                 this.initCanvas(); // On réinitialise le canvas
             }.bind(this));
         }
+    }
 
 
-        /*
+    class Carte {                                       // Classe Carte //
+
+        stations;
+        macarte;
+        marqueurs;
+        intervalleActualisation;
+
+        constructor(apiKey, refreshTime, maxZoom, minZoom, vueInitialeLong, vueInitialeLat, zoomInitial, disableZoomCluster) {
+            this.apiKey = apiKey;
+            this.refreshTime = refreshTime;
+            this.maxZoom = maxZoom;
+            this.minZoom = minZoom;
+            this.vueInitialeLong = vueInitialeLong;
+            this.vueInitialeLat = vueInitialeLat;
+            this.zoomInitial = zoomInitial;
+            this.disableZoomCluster = disableZoomCluster;
+            
+            this.initCarte();
+            this.loadLayers();
+            this.initClusters();
+            this.refresh();
+        }
+
+        initCarte() {
+            // initialisation de la carte
+            this.macarte = L.map('carte').setView([this.vueInitialeLong, this.vueInitialeLat], this.zoomInitial);
+        }
+
+        loadLayers() {
+            // Chargement des tuiles
+            L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+                maxZoom: this.maxZoom,
+                minZoom: this.minZoom,
+            }).addTo(this.macarte);
+        }
+
+        initClusters() {
+            // On initialise les clusters
+            this.marqueurs = L.markerClusterGroup({disableClusteringAtZoom: this.disableZoomCluster});
+        }
+
+        refresh() {
+            // Set le timer de refresh
+            this.afficher();
+            this.intervalleActualisation = setInterval(affich, this.refreshTime);
+
+            function affich() { // L'objet setInterval attend une fonction
+                this.afficher();
+            }
+        }
+
+        afficher() {
+            // Affiche la carte et ajoute les stations
+            $.getJSON("https://api.jcdecaux.com/vls/v3/stations?contract=brisbane&apiKey=" + this.apiKey, function(stations, status) {
+    
+                console.log("Status de l'appel JCDecaux : " + status);    
+        
+                this.marqueurs.clearLayers();
+                
+                let station;
+                
+                for (station of stations) {
+                    const stationVelilov = new Station(station.address, station.status, station.totalStands.availabilities.bikes, station.totalStands.availabilities.stands, station.position.latitude, station.position.longitude);
+                    //stationVelilov.afficheDetail();
+                    this.marqueurs.addLayer(stationVelilov.marqueur);
+                }
+        
+                this.macarte.addLayer(this.marqueurs);
+                console.log("Nombre total de stations : " + stations.length);
+            }.bind(this));
+        }
+    }
+
+
+    let monObjet = new Carte(apiKey, 60000, 18, 13, -27.482279, 153.028723, 13, 16);
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////ESSAIS///////////////////////////////////////////
+
+
+//////////////////////////////////////carte en procédurale///////////////////////////////
+ /*
+
+    let intervalActualisation;
+
+    (function () {      //Fonction auto invoquée
+        refresh();
+        intervalActualisation = setInterval(refresh,60000);
+    })();
+
+    // initialisation de la carte
+    macarte = L.map('carte').setView([-27.482279, 153.028723], 13);
+            
+    // Chargement des tuiles
+    L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+        attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+        maxZoom: 18,
+        minZoom: 13,
+    }).addTo(macarte);
+
+    let marqueurs = L.markerClusterGroup({disableClusteringAtZoom: 16});
+
+    function refresh () {
+        $.getJSON("https://api.jcdecaux.com/vls/v3/stations?contract=brisbane&apiKey=" + apiKey, function(stations, status) {
+    
+            console.log("Status de l'appel JCDecaux : " + status);    
+    
+            marqueurs.clearLayers();
+            
+            for (station of stations) {
+                const stationVelilov = new Station(station.address, station.status, station.totalStands.availabilities.bikes, station.totalStands.availabilities.stands, station.position.latitude, station.position.longitude);
+                //stationVelilov.afficheDetail();
+                marqueurs.addLayer(stationVelilov.marqueur);
+            }
+    
+            macarte.addLayer(marqueurs);
+            console.log("Nombre total de stations : " + stations.length);
+        });
+    };
+    */
+
+
+/////////////////////////////canvas//////////////////////
+
+/*
 
         // Trace un cercle
         cercle () {
@@ -473,43 +586,6 @@ function imageSlide() {
 
         }
         */
-
-
-        
-    }
-
-
-function refresh () {
-    $.getJSON("https://api.jcdecaux.com/vls/v3/stations?contract=brisbane&apiKey=" + apiKey, function(stations, status) {
-
-        console.log("Status de l'appel JCDecaux : " + status);    
-
-        marqueurs.clearLayers();
-        
-        for (station of stations) {
-            const stationVelilov = new Station(station.address, station.status, station.totalStands.availabilities.bikes, station.totalStands.availabilities.stands, station.position.latitude, station.position.longitude);
-            //stationVelilov.afficheDetail();
-            marqueurs.addLayer(stationVelilov.marqueur);
-        }
-
-        macarte.addLayer(marqueurs);
-        console.log("Nombre total de stations : " + stations.length);
-    });
-};
-
-
-
-
-
-
-
-
-
-
-
-/////////////////////////////////////////////////ESSAIS///////////////////////////////////////////
-
-
 
 
 
