@@ -1,6 +1,11 @@
 class Booking {                                 // Classe Réservation //
 
-    constructor() {
+    constructor(nom, prenom, stationID, endTime, adress) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.stationID = stationID;
+        this.endTime = endTime;
+        this.adress = adress;
 
         this.storageTest();
     }
@@ -8,10 +13,10 @@ class Booking {                                 // Classe Réservation //
     storageTest() {
         // On teste l'API web storage pour savoir si le navigateur permet le stockage
         function storageAvailable(type) {
-            var storage;
+            let storage;
             try {
                 storage = window[type];
-                var x = '__storage_test__';
+                let x = '__storage_test__';
                 storage.setItem(x, x);
                 storage.removeItem(x);
                 return true;
@@ -34,33 +39,46 @@ class Booking {                                 // Classe Réservation //
 
         if (storageAvailable('localStorage')) {
             // Yippee! We can use localStorage awesomeness
-            this.localStockageOk = true;
             console.log('Stockage local: OK');
         }
         else {
             // Too bad, no localStorage for us
-            this.localStockageOk = false;
             console.log('Stockage local: NO');
         }
 
 
         if (storageAvailable('sessionStorage')) {
             // Yippee! We can use localStorage awesomeness
-            this.sessionStockageOk = true;
             console.log('Stockage session: OK');
         }
         else {
             // Too bad, no localStorage for us
-            this.sessionStockageOk = false;
             console.log('Stockage session: NO');
+            alert("Attention votre réservation ne sera pas retenue si vous actualiser la page ou fermez le navigateur.")
         }
     }
 
-    localStorage() {
-
+    setLocalStorage(variableString, value) {
+        //On enregistre une valeur et on affiche le bandeau de réservation
+        localStorage.setItem(variableString, value);
     }
 
-    sessionStorage() {
+    setSessionStorage(variableString, value) {
+        // ID station et heure de fin en time Stamp
+        sessionStorage.setItem(variableString, value);
+    }
 
+    displayStorage() {
+        // On affiche le bandeau de réservation si on à une info de stockée en session
+        if(sessionStorage.getItem('adress')) {
+            $('#infoReservation').removeClass("d-none").addClass("d-block col-lg-12");
+            $('#adressReservation').text(sessionStorage.getItem('adress'));
+        }
+
+        //On remplis le formulaire si on à une info de stockée en local
+        if(localStorage.getItem('nom')) {
+            $('#prenomFormReservation').val(localStorage.getItem('prenom'));
+            $('#nomFormReservation').val(localStorage.getItem('nom'));
+        }
     }
 }

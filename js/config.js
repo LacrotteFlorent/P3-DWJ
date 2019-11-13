@@ -1,13 +1,13 @@
   // Objet dans lequel les variables réglables sont rassemblées
 
   
-  
+
   
   let globalConfig = {
         //Clé API JCDecaux
         apiKey : 'd48e8a6be13635c9408cd25496e3615a596d0a51',
 
-        //On configure les marqueurs
+        //Marqueurs des stations de la carte
         iconeOpen : {
             iconUrl: "img/icon_marqueurs_open_2.png",
             iconSize: [40, 40],

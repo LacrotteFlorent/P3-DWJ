@@ -3,7 +3,8 @@
 //On crée la carte !
 
     let myObject = new Map(globalConfig.apiKey, 60000, 18, 13, -27.482279, 153.028723, 13, 16);
-
+    let myStorageTest = new Booking;
+    myStorageTest.displayStorage();
 
 
 

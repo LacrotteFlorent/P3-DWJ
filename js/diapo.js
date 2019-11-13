@@ -83,10 +83,24 @@ function tempo() {
 // Boutons de la diapo
 $(function() {
     tempo();
-    $('#btnPrev').on('click', function() {prevDiapo(); console.log("clic precedent");});
-    $('#btnPlay').on('click', function() {tempo(); console.log("clic play"); tempoOn=true;$('.fa-play').css('color','#7A050C');$('.fa-pause').css('color','#F7BE03');});
-    $('#btnPause').on('click', function() {clearInterval(intervalID); tempoOn=false; console.log("clic pause");$('.fa-play').css('color','#F7BE03');$('.fa-pause').css('color','#7A050C');});
-    $('#btnNext').on('click', function () {nextDiapo(); console.log("clic suivant");}); 
+    $('#btnPrev').on('click', function() {
+        prevDiapo();
+        console.log("clic precedent");
+    });
+    $('#btnPlay').on('click', function() {
+        tempo(); console.log("clic play");
+        tempoOn=true;$('.fa-play').css('color','#7A050C');
+        $('.fa-pause').css('color','#F7BE03');
+    });
+    $('#btnPause').on('click', function() {
+        clearInterval(intervalID); tempoOn=false;
+        console.log("clic pause");$('.fa-play').css('color','#F7BE03');
+        $('.fa-pause').css('color','#7A050C');
+    });
+    $('#btnNext').on('click', function () {
+        nextDiapo();
+        console.log("clic suivant");
+    }); 
 });
 
 // Boutons slides

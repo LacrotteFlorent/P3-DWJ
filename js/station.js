@@ -16,8 +16,6 @@ class Station {                                     // Classe Station //
         this.markerGenerator();
         this.popupGenerator();
         this.popupButton();
-
-        console.log(this.stationID);
     }
 
     generateStates() {
@@ -127,7 +125,7 @@ class Station {                                     // Classe Station //
         $(this.marqueur).on('click', function() {
             $('.btnSub').on('click', function() {
                 console.log('Vous avez cliqué sur le bouton réservation de la station : ' + this.adresse);
-                const component = new Component(this.adresse, this.statusDetail, this.nbVelo, this.nbPlace, this.latitude, this.longitude);
+                const component = new Component(this.adresse, this.statusDetail, this.nbVelo, this.nbPlace, this.latitude, this.longitude, this.stationID);
             }.bind(this));
         }.bind(this));
     }
