@@ -1,6 +1,8 @@
 class Component {                                 // Classe Composant //
 
     canvas;
+    resa;
+    hourResa;
 
     constructor(adresse, statusDetail, nbVelo, nbPlace, latitude, longitude, stationID) {
         this.adresse = adresse;
@@ -11,11 +13,11 @@ class Component {                                 // Classe Composant //
         this.longitude = longitude;
         this.stationID = stationID;
 
-        this.displayComponent();
+        this.displayComponentInfo();
         this.componentButton();
     }
 
-    displayComponent() {
+    displayComponentInfo() {
         //affiche l'encart description avec les éléments de la station
         $('#adresseDescription').text(" " + this.adresse);
         $('#etatDescription').text(" " + this.statusDetail);
@@ -36,6 +38,10 @@ class Component {                                 // Classe Composant //
     }
 
     componentButton() {
+
+        this.resa = new Booking;
+        this.resa.displayStorage;
+
         // On affiche le bouton seulement si on peux réserver !!! => Vélo Dispo et station ouverte !
         // ON vérifie que la signature est présente et que le formulaire est remplis !
         // on stocke l'info dans l'API Web Storage
@@ -47,14 +53,15 @@ class Component {                                 // Classe Composant //
             $('#boutonReservationDescription').on("click", function(e) {
                 
                 if((this.canvas.clicDessin.length > 1)&&($('#nomFormReservation').val() !== "nom")&&($('#nomFormReservation').val() !== 0)&&($('#prenomFormReservation').val() !== "prenom")&&($('#prenomFormReservation').val() !== 0)) {
-                    let resa = new Booking;
-                    resa.setLocalStorage("prenom", ($('#prenomFormReservation').val()));
-                    resa.setLocalStorage("nom", ($('#nomFormReservation').val()));
-                    resa.setSessionStorage("sationID", (this.stationID));
-                    resa.setSessionStorage("endTime", "BLABLA POOKIE"); /// faire appel au timer ?
-                    resa.setSessionStorage("adress", (this.adresse));
-                    resa.displayStorage();
-                    
+                    this.resa.setLocalStorage("prenom", ($('#prenomFormReservation').val()));
+                    this.resa.setLocalStorage("nom", ($('#nomFormReservation').val()));
+                    this.resa.setSessionStorage("sationID", (this.stationID));
+                    this.hourResa = new Date;
+                    this.hourResa.setMinutes(this.hourResa.getMinutes() + 20);
+                    this.hourResa = (Math.round(this.hourResa.getTime()/1000));
+                    this.resa.setSessionStorage("endTime",(this.hourResa));
+                    this.resa.setSessionStorage("adress", (this.adresse));
+                    this.resa.displayStorage(); // On affiche le bandeau
                     e.preventDefault();
                     return false;
                 }
@@ -65,5 +72,10 @@ class Component {                                 // Classe Composant //
                 }
             }.bind(this));
         }
+    }
+
+    displayComponentInfoBand() {
+        // ON compare l'heure actuelle et l'heure de fin et on affiche l'heure de fin et le temps restant
+        
     }
 }

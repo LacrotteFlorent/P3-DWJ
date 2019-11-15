@@ -72,10 +72,14 @@ function prevDiapo () {
     });
 }
 
-// Délai de 5 sec entre chaque diapo
-let intervalID;
+
+
+// Situation Initiale
 let tempoOn = true; // Vrai si la diapo est en mode lecture
-$('.fa-play').css('color','#7A050C'); //
+$('.fa-play').css('color','#7A050C');
+let intervalID;
+
+// Délai de 5 sec entre chaque diapo
 function tempo() {
     intervalID = setInterval(nextDiapo,5000);
 }

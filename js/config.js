@@ -4,6 +4,9 @@
 
   
   let globalConfig = {
+        //Temps de réservation du vélo en minutes
+        bookingTime : 20,
+        
         //Clé API JCDecaux
         apiKey : 'd48e8a6be13635c9408cd25496e3615a596d0a51',
 

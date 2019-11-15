@@ -9,7 +9,17 @@
 
 
 
+/*
 
+    let timer = new Date;
+console.log(Math.round(timer.getTime()/1000)); // Timestamp en milisecondes
+
+
+timer.setMinutes(timer.getMinutes() + 20);
+console.log(timer.toDateString());
+console.log(timer.getMinutes());
+
+test = new Timer(20);
 
 
 

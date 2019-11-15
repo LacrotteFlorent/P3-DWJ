@@ -21,16 +21,16 @@ class Station {                                     // Classe Station //
     generateStates() {
         // On génere les états
         if((this.status === "OPEN") && (this.nbVelo >= 1) && (this.nbPlace >= 1)) {
-            this.statusDetail = "OPEN";
+            this.statusDetail = "Ouverte";
         }
         else if((this.status === "OPEN") && (this.nbVelo >= 1) && (this.nbPlace <= 0)) {
-            this.statusDetail = "NOTSTAND";
+            this.statusDetail = "Pas de places";
         }
         else if((this.status === "OPEN") && (this.nbVelo <= 0) && (this.nbPlace >= 1)) {
-            this.statusDetail = "NOTBIKE";
+            this.statusDetail = "Pas de vélos";
         }
         else {
-            this.statusDetail = "CLOSE";
+            this.statusDetail = "Fermée";
         }
     }
 
@@ -74,13 +74,13 @@ class Station {                                     // Classe Station //
         })
 
         // On change l'icone du marqueur en fonction des données de la station
-        if (this.statusDetail === "OPEN") {
+        if (this.statusDetail === "Ouverte") {
             this.marqueur = L.marker([this.latitude, this.longitude], {icon: iconeOpen})
         }
-        else if (this.statusDetail === "NOTSTAND") {
+        else if (this.statusDetail === "Pas de places") {
             this.marqueur = L.marker([this.latitude, this.longitude], {icon: iconeOnlyBike})
         }
-        else if (this.statusDetail === "NOTBIKE") {
+        else if (this.statusDetail === "Pas de vélos") {
             this.marqueur = L.marker([this.latitude, this.longitude], {icon: iconeOnlyStand})
         }
         else {

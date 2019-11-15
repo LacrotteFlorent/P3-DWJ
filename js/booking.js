@@ -1,5 +1,8 @@
 class Booking {                                 // Classe Réservation //
 
+    intervalID;
+    date;
+
     constructor(nom, prenom, stationID, endTime, adress) {
         this.nom = nom;
         this.prenom = prenom;
@@ -8,6 +11,8 @@ class Booking {                                 // Classe Réservation //
         this.adress = adress;
 
         this.storageTest();
+
+        this.remainingTime = (Math.round(((sessionStorage.getItem("endTime"))-(Date.now()/1000))/60));
     }
 
     storageTest() {
@@ -70,9 +75,16 @@ class Booking {                                 // Classe Réservation //
 
     displayStorage() {
         // On affiche le bandeau de réservation si on à une info de stockée en session
-        if(sessionStorage.getItem('adress')) {
-            $('#infoReservation').removeClass("d-none").addClass("d-block col-lg-12");
+        if(sessionStorage.getItem('endTime')) {
+            $('#infoReservation').removeClass("d-none").addClass("d-block");
             $('#adressReservation').text(sessionStorage.getItem('adress'));
+            this.date = new Date;
+            this.date.setTime(sessionStorage.getItem("endTime"));
+            $('#endTimer').text(this.date.getHours()+"h"+ this.date.getMinutes()+"m"+ this.date.getSeconds()+"s");
+            this.tempo();
+        }
+        else {
+            $('#infoReservation').removeClass("d-block").addClass("d-none");
         }
 
         //On remplis le formulaire si on à une info de stockée en local
@@ -80,5 +92,48 @@ class Booking {                                 // Classe Réservation //
             $('#prenomFormReservation').val(localStorage.getItem('prenom'));
             $('#nomFormReservation').val(localStorage.getItem('nom'));
         }
+    }
+
+    refreshStorage() {
+        // on affiche le temps restant en minutes avant la fin
+        if(  la date du jour est la meme que la date de fin de resa) {
+            if(this.remainingTime >= 1) {
+                this.remainingTime = (Math.round(((sessionStorage.getItem("endTime"))-(Date.now()/1000))/60));
+                console.log("Temps restant réservation: " + this.remainingTime) + "min";
+                $('#timerReservation').text(this.remainingTime);
+            }
+            else {
+                this.remainingTime = 0;
+                console.log(this.remainingTime);
+                $('#timerReservation').text(this.remainingTime);
+            }
+        }
+        else {
+            this.remainingTime = 0;
+            console.log(this.remainingTime);
+            $('#timerReservation').text(this.remainingTime);
+        }
+
+        // si l'heure de fin est egale ou supérieur a l'heure actuelle - 5min on change la couleur du bandeau en orange
+        if(this.remainingTime <= 5) {
+            $('#infoReservation').css('background-color','orange');
+        }
+
+        // si l'heure de fin est egale ou supérieur a l'heure actuelle - 2min on change la couleur du bandeau en orange
+        if(this.remainingTime <= 2) {
+            $('#infoReservation').css('background-color','red');
+        }
+
+        //si l'heure de fin est egale ou supérieure à l'heure actuelle on ferme la reservation
+        if(this.remainingTime <= 0) {
+            $('#infoReservation').removeClass("d-block").addClass("d-none");
+        }
+
+    }
+
+    // on compare les temps toutes les minutes
+    tempo() {
+        this.refreshStorage();
+        this.intervalID = setInterval(function(){this.refreshStorage()}.bind(this),60000);
     }
 }
