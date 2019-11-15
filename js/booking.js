@@ -96,7 +96,7 @@ class Booking {                                 // Classe Réservation //
 
     refreshStorage() {
         // on affiche le temps restant en minutes avant la fin
-        if(  la date du jour est la meme que la date de fin de resa) {
+        if(  this.endTime ===  this.endTime/*la date du jour est la meme que la date de fin de resa*/) {
             if(this.remainingTime >= 1) {
                 this.remainingTime = (Math.round(((sessionStorage.getItem("endTime"))-(Date.now()/1000))/60));
                 console.log("Temps restant réservation: " + this.remainingTime) + "min";
