@@ -3,6 +3,7 @@ class Component {                                 // Classe Composant //
     canvas;
     resa;
     hourResa;
+    timestamp;
 
     constructor(adresse, statusDetail, nbVelo, nbPlace, latitude, longitude, stationID) {
         this.adresse = adresse;
@@ -38,10 +39,6 @@ class Component {                                 // Classe Composant //
     }
 
     componentButton() {
-
-        this.resa = new Booking;
-        this.resa.displayStorage;
-
         // On affiche le bouton seulement si on peux réserver !!! => Vélo Dispo et station ouverte !
         // ON vérifie que la signature est présente et que le formulaire est remplis !
         // on stocke l'info dans l'API Web Storage
@@ -51,17 +48,13 @@ class Component {                                 // Classe Composant //
         else {
             $('#boutonReservationDescription').prop("disabled", false).css('background-color', 'white').val("Réserver");
             $('#boutonReservationDescription').on("click", function(e) {
-                
+
                 if((this.canvas.clicDessin.length > 1)&&($('#nomFormReservation').val() !== "nom")&&($('#nomFormReservation').val() !== 0)&&($('#prenomFormReservation').val() !== "prenom")&&($('#prenomFormReservation').val() !== 0)) {
-                    this.resa.setLocalStorage("prenom", ($('#prenomFormReservation').val()));
-                    this.resa.setLocalStorage("nom", ($('#nomFormReservation').val()));
-                    this.resa.setSessionStorage("sationID", (this.stationID));
                     this.hourResa = new Date;
-                    this.hourResa.setMinutes(this.hourResa.getMinutes() + 20);
-                    this.hourResa = (Math.round(this.hourResa.getTime()/1000));
-                    this.resa.setSessionStorage("endTime",(this.hourResa));
-                    this.resa.setSessionStorage("adress", (this.adresse));
-                    this.resa.displayStorage(); // On affiche le bandeau
+                    this.hourResa.setMinutes(this.hourResa.getMinutes() + 20); // On ajoute le timer de la réservation
+                    this.hourResa = (this.hourResa.getTime()); // On récupère la date en TimeStamp
+                    console.log("timestamp date " + this.hourResa);
+                    this.resa = new Booking(false, $('#nomFormReservation').val(), $('#prenomFormReservation').val(), this.stationID, this.hourResa, this.adresse );
                     e.preventDefault();
                     return false;
                 }
@@ -72,10 +65,5 @@ class Component {                                 // Classe Composant //
                 }
             }.bind(this));
         }
-    }
-
-    displayComponentInfoBand() {
-        // ON compare l'heure actuelle et l'heure de fin et on affiche l'heure de fin et le temps restant
-        
     }
 }
