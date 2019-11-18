@@ -115,7 +115,7 @@ class Booking {                                 // Classe Réservation //
 
         // on affiche le temps restant en minutes avant la fin
         if(this.endTime >= this.date) {
-            /*if(this.minutes >= 1) {
+            if(this.minutes >= 1) {
                 console.log("Temps restant réservation: " + this.minutes + "min");
                 $('#timerReservation').text(this.minutes + "min" + this.secondes + "sec");
             }
@@ -124,8 +124,7 @@ class Booking {                                 // Classe Réservation //
                 $('#timerReservation').text(this.minutes + "min" + this.secondes + "sec");
                 $('#infoReservation').removeClass("d-block").addClass("d-none");
                 sessionStorage.clear();
-            }*/
-
+            }
         }
         else {
             this.minutes = 0;
