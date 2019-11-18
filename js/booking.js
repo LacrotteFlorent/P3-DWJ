@@ -114,10 +114,18 @@ class Booking {                                 // Classe Réservation //
         $('#timerReservation').text(this.minutes + "min" + this.secondes + "sec");
 
         // on affiche le temps restant en minutes avant la fin
+<<<<<<< HEAD
         if(this.endTime >= this.date) {
             /*if(this.minutes >= 1) {
                 console.log("Temps restant réservation: " + this.minutes + "min");
                 $('#timerReservation').text(this.minutes + "min" + this.secondes + "sec");
+=======
+        if(  this.endTime ===  this.endTime/*la date du jour est la meme que la date de fin de resa*/) {
+            if(this.remainingTime >= 1) {
+                this.remainingTime = (Math.round(((sessionStorage.getItem("endTime"))-(Date.now()/1000))/60));
+                console.log("Temps restant réservation: " + this.remainingTime) + "min";
+                $('#timerReservation').text(this.remainingTime);
+>>>>>>> db81aa6fc723b8e020c349f855864be4333bdbd0
             }
             else {
                 this.minutes = 0;
