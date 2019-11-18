@@ -1,10 +1,11 @@
 class Booking {                                 // Classe Réservation //
 
     intervalID;
-    remainingTime;
-    remainingTimeDate;
     secondes;
     minutes;
+    heures;
+    jours;
+    totalSec;
 
     constructor(test , nom, prenom, stationID, endTime, adress) {
         
@@ -97,9 +98,6 @@ class Booking {                                 // Classe Réservation //
             $('#endTimer').text(this.endTime.getHours()+"h"+ this.endTime.getMinutes()+"m"+ this.endTime.getSeconds()+"s");
             this.tempo();
         }
-        else {
-            $('#infoReservation').removeClass("d-block").addClass("d-none");
-        }
 
         //On remplis le formulaire si on à une info de stockée en local
         if(localStorage.getItem('nom')) {
@@ -109,25 +107,12 @@ class Booking {                                 // Classe Réservation //
     }
 
     refreshStorage() {
-        this.calcSec();
-        this.calcMin();
+        this.date = new Date;
+        this.calcCountdown();
         $('#timerReservation').text(this.minutes + "min" + this.secondes + "sec");
 
-        // on affiche le temps restant en minutes avant la fin
-        if(this.endTime >= this.date) {
-            if(this.minutes >= 1) {
-                console.log("Temps restant réservation: " + this.minutes + "min");
-                $('#timerReservation').text(this.minutes + "min" + this.secondes + "sec");
-            }
-            else {
-                this.minutes = 0;
-                $('#timerReservation').text(this.minutes + "min" + this.secondes + "sec");
-                $('#infoReservation').removeClass("d-block").addClass("d-none");
-                sessionStorage.clear();
-            }
-        }
-        else {
-            this.minutes = 0;
+        // si la date de fin est plus petite que la date du jour c'est que l'événement est terminé
+        if(this.endTime <= this.date){
             $('#infoReservation').removeClass("d-block").addClass("d-none");
             sessionStorage.clear();
         }
@@ -138,41 +123,25 @@ class Booking {                                 // Classe Réservation //
         }
 
         // si l'heure de fin est egale ou supérieur a l'heure actuelle - 5min on change la couleur du bandeau en orange
-        if(this.minutes <= 5) {
+        if(this.minutes < 5) {
             $('#infoReservation').css('background-color','orange');
         }
 
         // si l'heure de fin est egale ou supérieur a l'heure actuelle - 2min on change la couleur du bandeau en orange
-        if(this.minutes <= 2) {
+        if(this.minutes < 2) {
             $('#infoReservation').css('background-color','red');
         }
-
-        //si l'heure de fin est egale ou supérieure à l'heure actuelle on ferme la reservation
-        if(this.minutes <= 0) {
-            $('#infoReservation').removeClass("d-block").addClass("d-none");
-        }
-
     }
 
-    calcSec() {
-        if((this.endTime.getSeconds() - this.date.getSeconds())>=0) {   
-            this.secondes = (this.endTime.getSeconds() - this.date.getSeconds());
-        }
-        else {
-            this.secondes = (60 + (this.endTime.getSeconds() - this.date.getSeconds()));
-        }
+    calcCountdown() {
+        this.totalSec = (this.endTime - this.date) /1000;
+        this.jours = Math.floor(this.totalSec / (60*60*24));
+        this.heures = Math.floor((this.totalSec - (this.jours*60*60*24)) / (60*60));
+        this.minutes = Math.floor((this.totalSec - ((this.jours*60*60*24+this.heures*60*60)))/60);
+        this.secondes = Math.floor(this.totalSec - ((this.jours*60*60*24+this.heures*60*60+this.minutes*60)));
     }
 
-    calcMin() {
-        if(this.minutes = ((this.endTime.getMinutes() - this.date.getMinutes()))>=0) {
-            this.minutes = ((this.endTime.getMinutes() - this.date.getMinutes()));
-        }
-        else {
-            this.minutes = (60 +((this.endTime.getMinutes() - this.date.getMinutes())));
-        }
-    }
-
-    // on compare les temps toutes les minutes
+    // On refresh toutes les secondes
     tempo() {
         this.refreshStorage();
         this.intervalID = setInterval(function(){this.refreshStorage()}.bind(this), 1000);
