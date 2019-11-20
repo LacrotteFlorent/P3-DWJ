@@ -71,14 +71,14 @@ header {
     color: #7A050C;
     font-size: 1.4em;
     font-weight: 300;
-    font-family: Mansalva, Arial, sans-serif;
+    font-family: 'Permanent Marker', Arial, sans-serif;
 }
 .titre2 {
     text-transform: uppercase;
-    color: #F7BE03;
+    color: #014599;
     font-size: 1.4em;
     font-weight: 300;
-    font-family: Mansalva, Arial, sans-serif;
+    font-family: 'Permanent Marker', Arial, sans-serif;
 }
 
 /* logo */
@@ -89,15 +89,15 @@ header {
 #conteneurLogo {
     border-radius: 80px;
     padding: 2px;
-    background-color: #FFD903;
+    background-color: #F7BE03;
     width: 120px;
     height: 120px;
     position: absolute;
     top: calc(50% - 60px);
     right: -30px;
     z-index: 10;
-    /*border: 4px solid black; */
-    box-shadow: 8px 8px 12px #333;
+    border: 1px solid black;
+    box-shadow: 3px 3px 0px #333;
 }
 
 #navLogo img {
@@ -112,9 +112,16 @@ header {
 #navCarte {
     position: relative;
     height: 80px;
-    background-color: #FFFFFF;
-    box-shadow: 8px 8px 12px #333;
+    background-color: #015BC9;
+    box-shadow: 8px 8px 0px #333;
     z-index: 10;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.fa-map-marked-alt {
+    font-size: 2.7em;
+    color: #F7BE03;
 }
 
 #navCarte a {
@@ -132,16 +139,17 @@ header {
 /* div titre */
 #navTitre {
     height: 80px;
-    font-family: Oswald, Arial, sans-serif;
+    font-family: 'Righteous', Arial, sans-serif;
     background-color: #FFFFFF;
     z-index: 9;
     padding: 0px 30px 0px 30px;
-    box-shadow: 8px 8px 12px #333;
+    box-shadow: 8px 8px 0px #333;
+    border: 1px solid black;
 }
 
 #navTitre h1 {
-    font-size: 1.8em;
-    margin-top: 10px;
+    font-size: 1.5em;
+    margin-top: 5px;
 }
 
 #navTitre p {
@@ -150,25 +158,33 @@ header {
 }
 
 /* div langue */
-#navLang {
+#navList {
     height: 80px;
-    background-color: #9EA5A7;
-    color: #7A050C;
+    background-color: #F7BE03;
+    color: #333;
     line-height: 0px;
     padding-top: 10px;
-    box-shadow: 8px 8px 12px #333;
+    box-shadow: 8px 8px 0px #333;
     z-index: 10;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
 }
 
-#navLang h3 {
-    margin-bottom: 0px !important;
-    font-size: 2em;
-}
-.fa-sort-down {
-    font-size: 1.8em;
-    line-height: 0.3 !important;
+#navList form {
+    font-size: 1.3em;
+    font-family: 'Righteous';
 }
 
+#navList form label {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#navList form select {
+    border-radius: 5px;
+}
 
 
                                                                                                                 /* Sous Section 1 */
@@ -203,38 +219,86 @@ header {
 }
 
 .fa-level-down-alt {
-    color: white;
+    color: #333;
     font-size: 1.5em;
 }
 /* BLOC SLIDES */
 .blocSlide {
-    border-radius: 25px;
-    background-color: rgba(122,5,12,0.6);
-    border: 12px solid #FFFFFF;
+    /*border-radius: 25px;*/
+    background-color: rgba(001,069,153,0.8);
+    border: 1px solid black;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 0px 10px 0px 10px;
     position: relative;
+    line-height: 60px;
+    box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.75);
 }
 
 .blocText > p {
-    font-family: Mansalva, Arial, sans-serif;
+    font-family: 'Righteous', Arial, sans-serif;
     color: white;
     font-size: 2em;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 .imgMarker {
     position: absolute;
     width: 40px;
-    left: -24px;
-    top: 7px;
+    left: 8px;
+    top: 15px;
+}
+
+#bloc12 {
+    background-color: rgba(247,190,3,0.8);
+}
+#bloc12 > p {
+    color: #333;
 }
 
 #bloc21 {
     background-size: cover;
     background-image: url(../img/clusters.jpg);
+}
+
+#bloc23 {
+    background-color: rgba(247,190,3,0.8);
+}
+
+#bloc23 > p {
+    color: #333;
+}
+
+#bloc31 {
+    background-color: rgba(247,190,3,0.8);
+}
+
+#bloc31 > p{
+    color: #333;
+}
+
+#bloc32 {
+    background-color: rgba(247,190,3,0.8);
+}
+
+#bloc32 > p{
+    color: #333;
+}
+
+#bloc34 > p {
+    margin-left: 38px;
+}
+
+#bloc35 {
+    background-color: rgba(247,190,3,0.8);
+}
+
+#bloc35 > p{
+    color: #333;
+    margin-left: 15px;
 }
 
 #bloc42 {
@@ -246,6 +310,14 @@ header {
     background-size: cover;
     background-position: center;
     background-image: url(../img/signature.jpg);
+}
+
+#bloc52 {
+    background-color: rgba(247,190,3,0.8);
+}
+
+#bloc52 > p {
+    color: #333;
 }
 
 #bloc62 {
@@ -292,9 +364,12 @@ header {
     background: transparent;
     border: none;
 }
- .fa-circle, .fa-step-backward, .fa-play, .fa-pause, .fa-step-forward  {
-    color: rgba(247,190,3,0.6);
+ .fa-square, .fa-step-backward, .fa-play, .fa-pause, .fa-step-forward  {
+    color: rgba(001,069,153,0.6);
     font-size: 1.6em;
+ }
+ .act {
+    color: rgba(001,069,153,1)
  }
 
 

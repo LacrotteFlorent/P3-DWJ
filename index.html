@@ -7,6 +7,8 @@
     Rouge foncé #7A050C
     Jaune clair #FFD903
     Jaune foncé #F7BE03
+    Bleu        #014599
+    Bleu clair  #015BC9
     -->
 <!-- Carte interactive - Made by Lacrotte Florent / Projet 3 - OpenClassrooms -->
 <html lang="fr">
@@ -33,7 +35,7 @@
     <link rel="stylesheet" href= "https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
     <link rel="stylesheet" href= "https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Advent+Pro|Oswald|Roboto+Slab|Comfortaa|Squada+One|Mansalva&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Advent+Pro|Oswald|Roboto+Slab|Short+Stack|Permanent+Marker|Righteous|Mansalva&display=swap" rel="stylesheet" />
     <!-- Fav Icon -->
     <link rel="icon" href=" ./img/faviconVelilov.ico" />
     <!-- Titre -->
@@ -78,15 +80,21 @@
                                         <img src="./img/logoVelilov.png" />
                                     </div>
                                 </div>
-                                <div class="col-10 col-lg-6 navigation" id="navTitre">
-                                    <h1><span class="titre1">Véli</span><span class="titre2">lov</span>, réservez votre vélo en ligne !</h1><noscript>Vous devez ativer votre JavaScript Pour utiliser le site</noscript>
+                                <div class="col-10 col-lg-5 navigation" id="navTitre">
+                                    <h1><span class="titre1">Véli</span><span class="titre2">lov</span> </br> Réserve ton vélo en ligne</h1><noscript>Vous devez ativer votre JavaScript Pour utiliser le site</noscript>
                                 </div>
                                 <div class="d-none d-lg-block col-lg-1 navigation" id="navCarte">
-                                    <a href="#sectionCarte"><img src="./img/logoCarte100x100.png" alt="Logo Carte" /></a>
+                                    <a href="#sectionCarte"><!--<img src="./img/logoCarte100x100.png" alt="Logo Carte" />--><i class="fas fa-map-marked-alt"></i></a>
                                 </div>
-                                <div class="col-2 col-lg-1 navigation" id="navLang">
-                                    <h3>Fr</h3>
-                                    <i class="fas fa-sort-down"></i>
+                                <div class="col-2 col-lg-2 navigation" id="navList">
+                                    <form>
+                                        <label for="cityList">Choisi ta ville:</label>
+                                        <select name="city" id="cityList">
+                                            <option value="brisbane">Brisbane</option>
+                                            <option value="brisbane">Paris</option>
+                                            <option value="brisbane">Lyon</option>
+                                        </select>
+                                    </form>
                                 </div>
                                 <div class="d-none d-lg-block col-lg-2 navigation" id="navEspace">
                                 </div>
@@ -106,12 +114,12 @@
                                             <button id="btnNext"><i class="fas fa-step-forward"></i></button>
                                         </div>
                                         <div id="boutonsAutreSlide" class="col-lg-4">
-                                            <button id="btnSlide1"><i class="fas fa-circle"></i></button>
-                                            <button id="btnSlide2"><i class="far fa-circle"></i></button>
-                                            <button id="btnSlide3"><i class="far fa-circle"></i></button>
-                                            <button id="btnSlide4"><i class="far fa-circle"></i></button>
-                                            <button id="btnSlide5"><i class="far fa-circle"></i></button>
-                                            <button id="btnSlide6"><i class="far fa-circle"></i></button>
+                                            <button id="btnSlide1"><i class="act fas fa-square"></i></button>
+                                            <button id="btnSlide2"><i class="far fa-square"></i></button>
+                                            <button id="btnSlide3"><i class="far fa-square"></i></button>
+                                            <button id="btnSlide4"><i class="far fa-square"></i></button>
+                                            <button id="btnSlide5"><i class="far fa-square"></i></button>
+                                            <button id="btnSlide6"><i class="far fa-square"></i></button>
                                         </div>
                                         <div class="col-lg-2"></div>
                                     </div>
@@ -146,7 +154,7 @@
                                                         <div class="col-12">
                                                             <div class="row">
                                                                 <div id="bloc22" class="col-10 blocSlide blocType1 blocText">
-                                                                    <p>Si tu est arrivé jusque là,</p>
+                                                                    <p>Si tu es arrivé jusque là,</p>
                                                                 </div>
                                                                 <div class="col-2 "></div>
                                                             </div>

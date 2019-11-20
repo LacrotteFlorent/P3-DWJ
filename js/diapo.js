@@ -76,7 +76,7 @@ function prevDiapo () {
 
 // Situation Initiale
 let tempoOn = true; // Vrai si la diapo est en mode lecture
-$('.fa-play').css('color','rgba(122,5,12,0.8)');
+$('.fa-play').css('color','rgba(001,069,153,1)');
 let intervalID;
 
 // Délai de 5 sec entre chaque diapo
@@ -93,13 +93,13 @@ $(function() {
     });
     $('#btnPlay').on('click', function() {
         tempo(); console.log("clic play");
-        tempoOn=true;$('.fa-play').css('color','rgba(122,5,12,0.8)');
-        $('.fa-pause').css('color','rgba(247,190,3,0.6)');
+        tempoOn=true;$('.fa-play').css('color','rgba(001,069,153,1)');
+        $('.fa-pause').css('color','rgba(001,069,153,0.6)');
     });
     $('#btnPause').on('click', function() {
         clearInterval(intervalID); tempoOn=false;
-        console.log("clic pause");$('.fa-play').css('color','rgba(247,190,3,0.6)');
-        $('.fa-pause').css('color','rgba(122,5,12,0.8)');
+        console.log("clic pause");$('.fa-play').css('color','rgba(001,069,153,0.6)');
+        $('.fa-pause').css('color','rgba(001,069,153,1)');
     });
     $('#btnNext').on('click', function () {
         nextDiapo();
@@ -135,8 +135,8 @@ for (let i=0 ; i < slides.length ; i++) {
 function imageSlide() {
     for (let i=0; i < slides.length; i++) {
         if($('#sliderRow > div:visible').is($(slides[i]))) {
-            $('#btnSlide1, #btnSlide2, #btnSlide3, #btnSlide4, #btnSlide5, #btnSlide6').html('<i class="far fa-circle"></i>');
-            $(boutonsSlides[i]).html('<i class="fas fa-circle"></i>');
+            $('#btnSlide1, #btnSlide2, #btnSlide3, #btnSlide4, #btnSlide5, #btnSlide6').html('<i class="far fa-square"></i>');
+            $(boutonsSlides[i]).html('<i class="act fas fa-square"></i>');
         }
     }
 }
