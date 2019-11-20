@@ -51,7 +51,6 @@ class Component {                                 // Classe Composant //
                     this.hourResa = new Date;
                     this.hourResa.setMinutes(this.hourResa.getMinutes() + globalConfig.bookingTime); // On ajoute le timer de la réservation
                     this.hourResa = (this.hourResa.getTime()); // On récupère la date en TimeStamp
-                    console.log("timestamp date " + this.hourResa);
                     this.resa = new Booking(false, $('#nomFormReservation').val(), $('#prenomFormReservation').val(), this.stationID, this.hourResa, this.adresse );
                     e.preventDefault();
                     return false;

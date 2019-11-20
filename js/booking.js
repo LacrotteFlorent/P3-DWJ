@@ -8,7 +8,6 @@ class Booking {                                 // Classe Réservation //
     totalSec;
 
     constructor(test , nom, prenom, stationID, endTime, adress) {
-        
         this.date = new Date;
         this.endTime = new Date;
 

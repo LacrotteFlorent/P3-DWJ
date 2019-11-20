@@ -202,9 +202,55 @@ header {
     top: calc(50% - 150px);
 }
 
+.fa-level-down-alt {
+    color: white;
+    font-size: 1.5em;
+}
+/* BLOC SLIDES */
 .blocSlide {
-    border-radius: 10px;
-    background-color: #F7BE03;
+    border-radius: 25px;
+    background-color: rgba(122,5,12,0.6);
+    border: 12px solid #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 10px 0px 10px;
+    position: relative;
+}
+
+.blocText > p {
+    font-family: Mansalva, Arial, sans-serif;
+    color: white;
+    font-size: 2em;
+}
+
+.imgMarker {
+    position: absolute;
+    width: 40px;
+    left: -24px;
+    top: 7px;
+}
+
+#bloc21 {
+    background-size: cover;
+    background-image: url(../img/clusters.jpg);
+}
+
+#bloc42 {
+    background-size: cover;
+    background-image: url(../img/popup.jpg);
+}
+
+#bloc51 {
+    background-size: cover;
+    background-position: center;
+    background-image: url(../img/signature.jpg);
+}
+
+#bloc62 {
+    background-size: cover;
+    background-image: url(../img/reservation.jpg);
 }
 
 .startHidden {
@@ -247,7 +293,7 @@ header {
     border: none;
 }
  .fa-circle, .fa-step-backward, .fa-play, .fa-pause, .fa-step-forward  {
-    color: #F7BE03;
+    color: rgba(247,190,3,0.6);
     font-size: 1.6em;
  }
 
