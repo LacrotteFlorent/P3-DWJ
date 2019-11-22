@@ -23,7 +23,7 @@ function nextDiapo () {
                     }
                 });
             });
-            $(this).hide().css('margin-left','3500px');
+            $(this).hide();//.css('margin-left','3500px');
         }
         else {
             $(this).next('div').show(function() {
@@ -35,7 +35,7 @@ function nextDiapo () {
                     }
                 });
             });
-            $(this).hide().css('margin-left','3500px');
+            $(this).hide();//.css('margin-left','3500px');
         }
     });
 }

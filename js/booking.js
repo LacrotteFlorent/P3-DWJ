@@ -18,6 +18,8 @@ class Booking {                                 // Classe Réservation //
             this.displayStorage();
         }
         else {
+            sessionStorage.clear();
+
             this.endTime.setTime(endTime);
             this.nom = nom;
             this.prenom = prenom;
@@ -92,9 +94,10 @@ class Booking {                                 // Classe Réservation //
         //this.date = Date.now();
         // On affiche le bandeau de réservation si on à une info de stockée en session
         if(sessionStorage.getItem('endTime')) {
+            this.endTime.setTime(sessionStorage.getItem('endTime'));
             $('#infoReservation').removeClass("d-none").addClass("d-block");
             $('#adressReservation').text(sessionStorage.getItem('adress'));
-            $('#endTimer').text(this.endTime.getHours()+"h"+ this.endTime.getMinutes()+"m"+ this.endTime.getSeconds()+"s");
+            $('#endTimer').text(this.endTime.getHours()+"h"+ this.endTime.getMinutes());//+"m"+ this.endTime.getSeconds()+"s");
             this.tempo();
         }
 
@@ -107,6 +110,7 @@ class Booking {                                 // Classe Réservation //
 
     refreshStorage() {
         this.date = new Date;
+        this.endTime.setTime(sessionStorage.getItem('endTime'));
         this.calcCountdown();
         $('#timerReservation').text(this.minutes + "min" + this.secondes + "sec");
 
@@ -119,16 +123,19 @@ class Booking {                                 // Classe Réservation //
         // si l'heure de fin est egale ou supérieur a l'heure actuelle - 5min on change la couleur du bandeau en orange
         if(this.minutes >= 5) {
             $('#infoReservation').css('background-color','darkgreen');
+            $('#infoReservation > p').css('color', 'white');
         }
 
         // si l'heure de fin est egale ou supérieur a l'heure actuelle - 5min on change la couleur du bandeau en orange
         if(this.minutes < 5) {
             $('#infoReservation').css('background-color','orange');
+            $('#infoReservation > p').css('color', '#333');
         }
 
         // si l'heure de fin est egale ou supérieur a l'heure actuelle - 2min on change la couleur du bandeau en orange
         if(this.minutes < 2) {
             $('#infoReservation').css('background-color','red');
+            $('#infoReservation > p').css('color', 'white');
         }
     }
 

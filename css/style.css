@@ -68,7 +68,7 @@ header {
 
 .titre1 {
     text-transform: uppercase;
-    color: #7A050C;
+    color: #BE9305;
     font-size: 1.4em;
     font-weight: 300;
     font-family: 'Permanent Marker', Arial, sans-serif;
@@ -112,7 +112,7 @@ header {
 #navCarte {
     position: relative;
     height: 80px;
-    background-color: #015BC9;
+    background-color: #333;
     box-shadow: 8px 8px 0px #333;
     z-index: 10;
     border-top: 1px solid black;
@@ -162,7 +162,6 @@ header {
     height: 80px;
     background-color: #F7BE03;
     color: #333;
-    line-height: 0px;
     padding-top: 10px;
     box-shadow: 8px 8px 0px #333;
     z-index: 10;
@@ -172,20 +171,58 @@ header {
     border: 1px solid black;
 }
 
-#navList form {
+#navList div {
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    width: 120px;
+    /*border-radius: 30px;*/
+    overflow: hidden;
+    background-color: #fff;
+    background: #fff;
+    position: relative;
     font-size: 1.3em;
+    font-family: 'Righteous';
+    margin-left: 10px;
+    border: 1px solid black;
+}
+
+#navList label {
+    font-size: 1.5em;
     font-family: 'Righteous';
 }
 
-#navList form label {
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-
-#navList form select {
+#navList div select {
+    padding: 0px 8px;
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    background-color: white;
+    background-image: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     border-radius: 5px;
+    text-align: center;
+
+margin-left: -26px;
 }
 
+#navList div:after {
+    top: 50%;
+    left: 85%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(0, 0, 0, 0);
+    border-top-color: #333;
+    border-width: 5px;
+    margin-top: -2px;
+    z-index: 100;
+}
 
                                                                                                                 /* Sous Section 1 */
 
@@ -206,6 +243,11 @@ header {
 
 
                                                                                                                 /* Slider */
+
+.startHidden {
+    display: none;
+    margin-left: -3500px;
+}
 
 #slider {
     height: calc(100vh - 200px);
@@ -262,6 +304,7 @@ header {
 #bloc21 {
     background-size: cover;
     background-image: url(../img/clusters.jpg);
+    box-shadow: none;
 }
 
 #bloc23 {
@@ -276,22 +319,22 @@ header {
     background-color: rgba(247,190,3,0.8);
 }
 
-#bloc31 > p{
+#bloc31 > p {
     color: #333;
 }
-
+/*
 #bloc32 {
     background-color: rgba(247,190,3,0.8);
 }
 
-#bloc32 > p{
+#bloc32 > p {
     color: #333;
 }
-
+*/
 #bloc34 > p {
     margin-left: 38px;
 }
-
+/*
 #bloc35 {
     background-color: rgba(247,190,3,0.8);
 }
@@ -300,16 +343,23 @@ header {
     color: #333;
     margin-left: 15px;
 }
+*/
+
+#bloc35 > p {
+    margin-left: 15px;
+}
 
 #bloc42 {
     background-size: cover;
     background-image: url(../img/popup.jpg);
+    box-shadow: none;
 }
 
 #bloc51 {
     background-size: cover;
     background-position: center;
     background-image: url(../img/signature.jpg);
+    box-shadow: none;
 }
 
 #bloc52 {
@@ -323,10 +373,7 @@ header {
 #bloc62 {
     background-size: cover;
     background-image: url(../img/reservation.jpg);
-}
-
-.startHidden {
-    display: none;
+    box-shadow: none;
 }
 
 /* Type de bloc */

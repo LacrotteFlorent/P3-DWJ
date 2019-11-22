@@ -48,10 +48,13 @@ class Component {                                 // Classe Composant //
             $('#boutonReservationDescription').prop("disabled", false).css('background-color', 'white').val("Réserver");
             $('#boutonReservationDescription').on("click", function(e) {
                 if((this.canvas.clicDessin.length > 1)&&($('#nomFormReservation').val() !== "nom")&&($('#nomFormReservation').val() !== 0)&&($('#prenomFormReservation').val() !== "prenom")&&($('#prenomFormReservation').val() !== 0)) {
+                    sessionStorage.clear();
                     this.hourResa = new Date;
                     this.hourResa.setMinutes(this.hourResa.getMinutes() + globalConfig.bookingTime); // On ajoute le timer de la réservation
                     this.hourResa = (this.hourResa.getTime()); // On récupère la date en TimeStamp
                     this.resa = new Booking(false, $('#nomFormReservation').val(), $('#prenomFormReservation').val(), this.stationID, this.hourResa, this.adresse );
+                    $('#informations').removeClass("d-block col-lg-3").addClass("d-none");
+                    $("#carte").removeClass("col-lg-9").addClass("col-lg-12");
                     e.preventDefault();
                     return false;
                 }
