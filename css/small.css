@@ -1,3 +1,54 @@
+                              /* header */
+
+#navTitre, #navList {
+    border: none;
+    box-shadow: none;
+}
+
+
+                              /* boutons slide */
+
 #bouton {
-    margin-top: 20px;
+    margin-top: 80px;
+}
+
+
+                                /* bloc slide */
+
+.blocSlide {
+    border: none;
+    box-shadow: none;
+}
+
+.blocType1.col-none {
+    height: 0px;
+}
+
+#bloc11, #bloc21, #bloc31, #bloc42, #bloc51, #bloc62 {
+    margin-top: -100px;
+}
+
+#bloc12 {
+    padding-bottom: 30px;
+}
+
+#slide4 > div, #slide6 > div {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+#bloc12, #bloc31, #bloc41 {
+    height: 100%;
+}
+
+#bloc52, #bloc61 {
+    height: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+                                /* pied de page */
+
+footer {
+    height: 180px;
 }

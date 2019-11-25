@@ -11,7 +11,7 @@ body {
     background-color: /* rgba(76, 175, 80, 0.3)*/ none;
     border: /*2px solid black*/ none;
     border-radius: 0px;
-    line-height: 40px;
+    /*line-height: 40px;*/
     text-align: center;
 }
 
@@ -117,6 +117,10 @@ header {
     z-index: 10;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
+}
+
+#bouton {
+    z-index: 1000;
 }
 
 .fa-map-marked-alt {
@@ -277,6 +281,7 @@ margin-left: -26px;
     position: relative;
     line-height: 60px;
     box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.75);
+    background-position: center;
 }
 
 .blocText > p {
@@ -285,6 +290,7 @@ margin-left: -26px;
     font-size: 2em;
     margin-top: 0px;
     margin-bottom: 0px;
+    z-index: 10;
 }
 
 .imgMarker {
@@ -303,6 +309,7 @@ margin-left: -26px;
 
 #bloc21 {
     background-size: cover;
+    background-position: center;
     background-image: url(../img/clusters.jpg);
     box-shadow: none;
 }
@@ -322,28 +329,25 @@ margin-left: -26px;
 #bloc31 > p {
     color: #333;
 }
-/*
+
 #bloc32 {
-    background-color: rgba(247,190,3,0.8);
+    background-color: #06973B;
 }
 
-#bloc32 > p {
-    color: #333;
+#bloc33 {
+    background-color: #DA6D33 ;
 }
-*/
+#bloc34 {
+    background-color: #8A64BB;
+}
+
 #bloc34 > p {
     margin-left: 38px;
 }
-/*
-#bloc35 {
-    background-color: rgba(247,190,3,0.8);
-}
 
-#bloc35 > p{
-    color: #333;
-    margin-left: 15px;
+#bloc35 {
+    background-color: #3392DA;
 }
-*/
 
 #bloc35 > p {
     margin-left: 15px;
@@ -351,6 +355,7 @@ margin-left: -26px;
 
 #bloc42 {
     background-size: cover;
+    background-position: left;
     background-image: url(../img/popup.jpg);
     box-shadow: none;
 }
@@ -372,6 +377,7 @@ margin-left: -26px;
 
 #bloc62 {
     background-size: cover;
+    background-position: center;
     background-image: url(../img/reservation.jpg);
     box-shadow: none;
 }

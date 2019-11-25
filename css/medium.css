@@ -1,4 +1,22 @@
                                 /* boutons slide */
+
 #bouton {
-    
+
 }
+
+
+                                /* bloc slide */
+                                
+.blocSlide {
+    border: none;
+    box-shadow: none;
+}
+
+
+
+                                /* pied de page */
+footer {
+    height: 100px;
+}
+
+
