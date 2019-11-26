@@ -18,7 +18,7 @@ class Map {                                       // Classe Map //
         this.zoomInitial = zoomInitial;
         this.disableZoomCluster = disableZoomCluster;
 
-        this.contrat = globalConfig.ville;
+        this.contrat = globalConfig.ville.contrat_name;
         
         this.initCarte();
         this.listChoice();
@@ -31,10 +31,12 @@ class Map {                                       // Classe Map //
         //Récupère et affiche la liste des contrats disponnibles
         $.getJSON("https://api.jcdecaux.com/vls/v3/contracts?&apiKey=d48e8a6be13635c9408cd25496e3615a596d0a51", function(contrats) {
             let contrat;
+            $('#cityList').empty();
+            console.log('Nombre de contrats disponnibles: ' + contrats.length);
+            $('#cityList').append('<option value=' + globalConfig.ville.contrat_name + '>' + globalConfig.ville.cities + '</option>');
             for(contrat of contrats) {
-                console.log('Nombre de contrats disponnibles: ' + contrats.length);
-                if(contrat.commercial_name != null) {
-                    $('#cityList').append('<option value=' + contrat.name + '>' + contrat.commercial_name + '</option>');
+                if(contrat.commercial_name != null & contrat.name != globalConfig.ville.contrat_name) {
+                    $('#cityList').append('<option value=' + contrat.name + '>' + contrat.cities + '</option>');
                 }
             }
         });

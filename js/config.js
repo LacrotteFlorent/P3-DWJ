@@ -5,11 +5,12 @@
   
   let globalConfig = {
         //Ville au chargement
-        ville : "brisbane",
-
-        //Latitude au chargement
-
-        //Longitude au chargement
+        ville : {
+            contrat_name: "brisbane",
+            cities: "Brisbane",
+            latInit: -27.482279,
+            longInit: 153.028723,
+        },
 
         //Temps de réservation du vélo en minutes
         bookingTime : 6,
@@ -41,5 +42,20 @@
             iconSize: [40, 40],
             icon: [25, 50],
             popupAnchor: [0, -15]
-        }
+        },
+
+        //Temps entre chaque rafraichissement de la carte et des stations en ms
+        refresh: 60000,
+
+        //Zoom Maximum (entre 0 et 20)
+        zoomMax: 18,
+
+        //Zoom Minimum (entre 0 et 20)
+        zoomMin: 11,
+
+        //Zoom initial (entre 0 et 20)
+        zoomInit: 12,
+
+        //Désactivation des clusters à ce zoom (entre 0 et 20)
+        zoomCluster: 16
     };
