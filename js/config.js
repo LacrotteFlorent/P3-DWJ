@@ -4,6 +4,13 @@
 
   
   let globalConfig = {
+        //Ville au chargement
+        ville : "brisbane",
+
+        //Latitude au chargement
+
+        //Longitude au chargement
+
         //Temps de réservation du vélo en minutes
         bookingTime : 6,
         

@@ -7,11 +7,11 @@ class Booking {                                 // Classe Réservation //
     jours;
     totalSec;
 
-    constructor(test , nom, prenom, stationID, endTime, adress) {
+    constructor(storagetest , nom, prenom, stationID, endTime, adress) {
         this.date = new Date;
         this.endTime = new Date;
 
-        if(test === true) {
+        if(storagetest === true) {
             let session = sessionStorage.getItem("endTime");
             this.endTime.setTime(session);
             this.storageTest();
