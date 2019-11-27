@@ -249,9 +249,14 @@ header {
     top: 15px;
 }
 
+#bloc11 > .bulleInfo {
+    margin-top: 35px;
+}
+
 #bloc12 {
     background-color: white;
 }
+
 #bloc12 > p {
     color: #333;
 }
@@ -290,16 +295,8 @@ header {
     background-color: #8A64BB;
 }
 
-#bloc34 > p {
-    margin-left: 38px;
-}
-
 #bloc35 {
     background-color: #3392DA;
-}
-
-#bloc35 > p {
-    margin-left: 15px;
 }
 
 #bloc42 {
@@ -333,8 +330,7 @@ header {
 
 .bulleInfo {
     display: flex;
-    align-items: baseline;
-    margin-top: 35px;
+    align-items: center;
 }
 
 .bulleInfo > div {
