@@ -1,58 +1,18 @@
 
-img {
-    width: 100%;
-}
-
-body {
-    padding-top: 0px;
-}
-
-[class*="col-"] {
-    background-color: /* rgba(76, 175, 80, 0.3)*/ none;
-    border: /*2px solid black*/ none;
-    border-radius: 0px;
-    /*line-height: 40px;*/
-    text-align: center;
-}
-
-#sectionPrincipale {
-    height: auto;
-}
-
-#sectionSlider {
-    height: 800px;
-}
-
-#Sectioncarte {
-    height: 800px;
-}
-
-
-#bouton {
-    height: 50px;
-}
-
-#boutonsAutreSlide {
-    height: 50px;
-}
-
-#boutonsDiapo {
-    height: 50px;
-}
-
-
-
-
-
-
-
-
-
-
-
 body {
     color: #494E51;
     overflow-x: hidden;
+    line-height: 2.1em !important;
+    padding-top: 0px;
+    text-align: center;
+}
+
+p {
+    margin-bottom: 0rem;
+}
+
+img {
+    width: 100%;
 }
 
                                                                                                                 /* Header */
@@ -75,7 +35,7 @@ header {
 }
 .titre2 {
     text-transform: uppercase;
-    color: #014599;
+    color: #333;
     font-size: 1.4em;
     font-weight: 300;
     font-family: 'Permanent Marker', Arial, sans-serif;
@@ -113,10 +73,7 @@ header {
     position: relative;
     height: 80px;
     background-color: #333;
-    box-shadow: 8px 8px 0px #333;
     z-index: 10;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
 }
 
 #bouton {
@@ -147,8 +104,6 @@ header {
     background-color: #FFFFFF;
     z-index: 9;
     padding: 0px 30px 0px 30px;
-    box-shadow: 8px 8px 0px #333;
-    border: 1px solid black;
 }
 
 #navTitre h1 {
@@ -167,12 +122,10 @@ header {
     background-color: #F7BE03;
     color: #333;
     padding-top: 10px;
-    box-shadow: 8px 8px 0px #333;
     z-index: 10;
     align-items: center;
     display: flex;
     justify-content: center;
-    border: 3px solid #333;
 }
 
 #navList div {
@@ -180,7 +133,6 @@ header {
     margin: 0;
     border: 1px solid #ccc;
     width: 120px;
-    /*border-radius: 30px;*/
     overflow: hidden;
     background-color: #fff;
     background: #fff;
@@ -189,6 +141,7 @@ header {
     font-family: 'Righteous';
     margin-left: 10px;
     border: 3px solid #333;
+    border-radius: 10px;
 }
 
 #navList label {
@@ -204,6 +157,7 @@ header {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    border-radius: 10px;
 }
 
 #navList div:after {
@@ -226,7 +180,7 @@ header {
 
 #sousSection1 {
     min-height: 100vh;
-    background-image: url("../img/brisbane2.jpg");
+    background-image: url("../img/mainFeature.jpg");
     background-position: center;
     background-size: cover;
     box-shadow: 8px 8px 12px #333;
@@ -241,6 +195,10 @@ header {
 
 
                                                                                                                 /* Slider */
+
+#sectionSlider {
+    height: 800px;
+}
 
 .startHidden {
     display: none;
@@ -264,26 +222,23 @@ header {
 }
 /* BLOC SLIDES */
 .blocSlide {
-    /*border-radius: 25px;*/
-    background-color: rgba(001,069,153,0.8);
-    border: 1px solid black;
+    background-color: #F5F3F1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 0px 10px 0px 10px;
     position: relative;
-    line-height: 60px;
     box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.75);
     background-position: center;
+    border-radius: 5px;
 }
 
 .blocText > p {
     font-family: 'Righteous', Arial, sans-serif;
-    color: white;
+    color: #333;
     font-size: 2em;
     margin-top: 0px;
-    margin-bottom: 0px;
     z-index: 10;
 }
 
@@ -295,7 +250,7 @@ header {
 }
 
 #bloc12 {
-    background-color: rgba(247,190,3,0.8);
+    background-color: white;
 }
 #bloc12 > p {
     color: #333;
@@ -309,7 +264,7 @@ header {
 }
 
 #bloc23 {
-    background-color: rgba(247,190,3,0.8);
+    background-color: white;
 }
 
 #bloc23 > p {
@@ -317,7 +272,7 @@ header {
 }
 
 #bloc31 {
-    background-color: rgba(247,190,3,0.8);
+    background-color: white;
 }
 
 #bloc31 > p {
@@ -362,7 +317,7 @@ header {
 }
 
 #bloc52 {
-    background-color: rgba(247,190,3,0.8);
+    background-color: white;
 }
 
 #bloc52 > p {
@@ -371,9 +326,48 @@ header {
 
 #bloc62 {
     background-size: cover;
-    background-position: center;
+    background-position: top;
     background-image: url(../img/reservation.jpg);
     box-shadow: none;
+}
+
+.bulleInfo {
+    display: flex;
+    align-items: baseline;
+    margin-top: 35px;
+}
+
+.bulleInfo > div {
+    display: flex;
+    color: white;
+    font-size: 2em;
+    font-family: "Righteous", Arial, sans-serif;
+    align-items: center;
+    justify-content: center;
+}
+
+.bulleInfo > p {
+    font-family: "Righteous";
+    font-size: 1.6em;
+    color: #333;
+    margin-left: 10px;
+}
+
+.litleText {
+    font-family: "Roboto Slab", Arial, sans-serif;
+    font-size: 0.6em;
+    line-height: 1.2em !important;
+}
+
+.bigText {
+    margin-bottom: 1.2em;
+}
+
+.cercle {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background: #333;
 }
 
 /* Type de bloc */
@@ -394,6 +388,18 @@ header {
                                                                                                                /* Boutons slider */
 
 
+#bouton {
+    height: 50px;
+}
+
+#boutonsAutreSlide {
+    height: 50px;
+}
+
+#boutonsDiapo {
+    height: 50px;
+}
+
 /* Boutons diapo */
 #boutonsDiapo button {
     border: none;
@@ -412,16 +418,19 @@ header {
     border: none;
 }
  .fa-square, .fa-step-backward, .fa-play, .fa-pause, .fa-step-forward  {
-    color: rgba(001,069,153,0.6);
+    color: #919191;
     font-size: 1.6em;
  }
  .act {
-    color: rgba(001,069,153,1)
+    color: #333;
  }
 
 
                                                                                                               /* Carte */
 
+#Sectioncarte {
+    height: 800px;
+}
 
 /* Hauteur de la carte */
 #carte {
@@ -456,7 +465,7 @@ header {
 /* Bouton réserver Popup */
 .btnSub {
     font-weight: bold;
-    border: 5px double darkred;
+    border: 5px double #015BC9;
     border-radius: 15px;
     background-color: transparent;
     color: #333;
@@ -527,7 +536,7 @@ header {
 #boutonReservationDescription {
     margin-top: 20px;
     font-weight: bold;
-    border: 5px double darkred;
+    border: 5px double #015BC9;
     border-radius: 15px;
     background-color: transparent;
     color: #333;
@@ -541,7 +550,7 @@ header {
 
 #boutonEffacerCanvas {
     position: absolute;
-    border: none;/*1px solid #333;*/
+    border: none;
     background: transparent;
     font-size: 1.2em;
     border-radius: 100px;
@@ -584,3 +593,9 @@ footer {
     justify-content: center;
     align-items: center;
 }
+
+
+
+
+
+

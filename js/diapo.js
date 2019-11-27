@@ -76,7 +76,7 @@ function prevDiapo () {
 
 // Situation Initiale
 let tempoOn = true; // Vrai si la diapo est en mode lecture
-$('.fa-play').css('color','rgba(001,069,153,1)');
+$('.fa-play').css('color','#333');
 let intervalID;
 
 // Délai de 5 sec entre chaque diapo
@@ -93,13 +93,13 @@ $(function() {
     });
     $('#btnPlay').on('click', function() {
         tempo(); console.log("clic play");
-        tempoOn=true;$('.fa-play').css('color','rgba(001,069,153,1)');
-        $('.fa-pause').css('color','rgba(001,069,153,0.6)');
+        tempoOn=true;$('.fa-play').css('color','#333');
+        $('.fa-pause').css('color','#919191');
     });
     $('#btnPause').on('click', function() {
         clearInterval(intervalID); tempoOn=false;
-        console.log("clic pause");$('.fa-play').css('color','rgba(001,069,153,0.6)');
-        $('.fa-pause').css('color','rgba(001,069,153,1)');
+        console.log("clic pause");$('.fa-play').css('color','#919191');
+        $('.fa-pause').css('color','#333');
     });
     $('#btnNext').on('click', function () {
         nextDiapo();
