@@ -55,7 +55,7 @@ function prevDiapo () {
                     }
                 });
             });
-            $(this).hide().css('margin-left','3500px');
+            $(this).hide()//.css('margin-left','3500px');
         }
         else {
             $(this).prev('div').show(function() {
@@ -67,7 +67,7 @@ function prevDiapo () {
                     }
                 });
             });
-            $(this).hide().css('margin-left','3500px');
+            $(this).hide()//.css('margin-left','3500px');
         }
     });
 }

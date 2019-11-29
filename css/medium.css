@@ -1,5 +1,14 @@
                                 /* boutons slide */
 
+#boutonsAutreSlide {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+#boutonsDiapo {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
 
 
                                 /* bloc slide */
@@ -52,16 +61,16 @@
                                 /* Reservation */
 
 #informations {
-    height: 600px;
+    height: auto;
 }
 
 #infoStation {
-    height: 150px;
+    height: auto;
 }
 
                                 /* pied de page */
 footer {
-    height: 100px;
+    /*height: 100px;*/
 }
 
 

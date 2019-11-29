@@ -9,6 +9,7 @@ body {
 
 p {
     margin-bottom: 0rem;
+    margin-top: 0rem;
 }
 
 img {
@@ -33,6 +34,7 @@ header {
     font-weight: 300;
     font-family: 'Permanent Marker', Arial, sans-serif;
 }
+
 .titre2 {
     text-transform: uppercase;
     color: #333;
@@ -74,10 +76,6 @@ header {
     height: 80px;
     background-color: #333;
     z-index: 10;
-}
-
-#bouton {
-    z-index: 1000;
 }
 
 .fa-map-marked-alt {
@@ -149,6 +147,7 @@ header {
     font-family: 'Righteous';
 }
 
+/* Reinitialisation de la liste */
 #navList div select {
     border: none;
     box-shadow: none;
@@ -159,7 +158,7 @@ header {
     appearance: none;
     border-radius: 10px;
 }
-
+/* Ajout de la flèche */
 #navList div:after {
     top: 50%;
     left: 85%;
@@ -197,7 +196,13 @@ header {
                                                                                                                 /* Slider */
 
 #sectionSlider {
-    height: 800px;
+    height: auto;
+    min-height: 800px;
+}
+
+#sectionSlider >div {
+    height: auto;
+    min-height: 800px;
 }
 
 .startHidden {
@@ -206,7 +211,7 @@ header {
 }
 
 #slider {
-    height: calc(100vh - 200px);
+    height: calc(100vh - 20em);
     position: relative;
 }
 
@@ -226,7 +231,7 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     padding: 0px 10px 0px 10px;
     position: relative;
     box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.75);
@@ -308,7 +313,7 @@ header {
 
 #bloc51 {
     background-size: cover;
-    background-position: center;
+    background-position: left;
     background-image: url(../img/signature.jpg);
     box-shadow: none;
 }
@@ -385,41 +390,50 @@ header {
 
 
 #bouton {
-    height: 50px;
-}
-
-#boutonsAutreSlide {
-    height: 50px;
+    height: auto;
+    z-index: 1000;
 }
 
 #boutonsDiapo {
     height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aliceblue;
+    border-radius: 5px;
+    box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.75);
 }
 
-/* Boutons diapo */
 #boutonsDiapo button {
     border: none;
     background-color: transparent;
 }
 
-/*Boutons slide*/
 #boutonsAutreSlide {
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: aliceblue;
+    border-radius: 5px;
+    box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.75);
+    display: flex;
+    justify-content: space-around;
 }
+
 #boutonsAutreSlide button {
-    margin-right: 20px;
     background: transparent;
     border: none;
 }
- .fa-square, .fa-step-backward, .fa-play, .fa-pause, .fa-step-forward  {
+
+.fa-square, .fa-step-backward, .fa-play, .fa-pause, .fa-step-forward  {
     color: #919191;
     font-size: 1.6em;
- }
- .act {
+}
+
+.act {
     color: #333;
- }
+}
 
 
                                                                                                               /* Carte */
@@ -430,7 +444,7 @@ header {
 
 /* Hauteur de la carte */
 #carte {
-    height: 800px;
+    min-height: 90vh;
 }
 
 /* Popup des marqueurs */
@@ -469,7 +483,11 @@ header {
 
                             /* Encart Description */
 #informations {
-    height: 800px;
+    /*height: 800px;*/
+    align-items: center;
+    flex-direction: column-reverse;
+    justify-content: space-around;
+    height: auto;
 }
 
 #infoStation div {
@@ -480,16 +498,20 @@ header {
     flex-wrap: wrap;
     line-height: 20px;
 }
+
 #infoStation > p {
     margin-top: -10px;
 }
 
 #infoStation {
-    height: 300px;
+    /*height: 300px;*/
+    margin-top: 20px;
 }
 
 #reservation {
-    height: 500px;
+    /*height: 500px;*/
+    height: auto;
+    margin-top: 30px;
 }
 
 #reservation {
@@ -542,6 +564,7 @@ header {
 /* bouton effacer */
 #divCanvas {
     position: relative;
+    margin-top: 20px;
 }
 
 #boutonEffacerCanvas {
@@ -550,8 +573,7 @@ header {
     background: transparent;
     font-size: 1.2em;
     border-radius: 100px;
-    left: 27px;
-    top: 40px;
+    padding-top: 5px;
 }
 
 /* bouton effacer logo */
@@ -581,7 +603,7 @@ header {
 
 
 footer {
-    height: 80px;
+    height: auto;
     background-color: #9EA5A7;
     color: #333;
     font-size: 1.3em;
@@ -590,7 +612,9 @@ footer {
     align-items: center;
 }
 
-
+footer > p {
+    height: auto;
+}
 
 
 

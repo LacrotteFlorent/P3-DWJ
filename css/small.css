@@ -4,18 +4,37 @@
     border: none;
     box-shadow: none;
     border-radius: 30px;
-    margin-left: 20px;
+    /*margin-left: 20px;*/
 }
 
 
                               /* boutons slide */
 
 #bouton {
-    margin-top: 80px;
+    margin-top: 20px;
+}
+
+#boutonsAutreSlide {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    box-shadow: none;
+}
+
+#boutonsDiapo {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    box-shadow: none;
 }
 
 
                                 /* bloc slide */
+
+                                
+.d-block {
+    display: flex;
+}
+
+
 
 .blocSlide {
     border: none;
@@ -35,6 +54,7 @@
 
 .blocImage {
     height: 300px;
+    background-size: 50%;
 }
 
 #bloc21 {
@@ -72,46 +92,19 @@
     margin-bottom: 30px;
 }
 
-/*
-.blocType1.col-none {
-    height: 0px;
-}
 
-#bloc11, #bloc21, #bloc31, #bloc42, #bloc51, #bloc62 {
-    
-}
-
-#bloc12 {
-    padding-bottom: 30px;
-}
-
-#slide4 > div, #slide6 > div {
-    display: flex;
-    flex-direction: column-reverse;
-}
-
-#bloc12, #bloc31, #bloc41 {
-    height: 100%;
-}
-
-#bloc52, #bloc61 {
-    height: 100%;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-*/
                                 /* Reservation */
 
 #informations {
-    height: 600px;
+    /*height: 600px;*/
 }
 
 #infoStation {
-    height: 150px;
+    /*height: 150px;*/
 }
 
                                 /* pied de page */
 
 footer {
-    height: 180px;
+    /*height: 180px;*/
 }

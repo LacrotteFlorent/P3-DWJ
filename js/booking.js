@@ -6,6 +6,8 @@ class Booking {                                 // Classe Réservation //
     heures;
     jours;
     totalSec;
+    finalHour;
+    finalMin;
 
     constructor(storagetest , nom, prenom, stationID, endTime, adress) {
         this.date = new Date;
@@ -19,7 +21,6 @@ class Booking {                                 // Classe Réservation //
         }
         else {
             sessionStorage.clear();
-
             this.endTime.setTime(endTime);
             this.nom = nom;
             this.prenom = prenom;
@@ -97,7 +98,24 @@ class Booking {                                 // Classe Réservation //
             this.endTime.setTime(sessionStorage.getItem('endTime'));
             $('#infoReservation').removeClass("d-none").addClass("d-block");
             $('#adressReservation').text(sessionStorage.getItem('adress'));
-            $('#endTimer').text(this.endTime.getHours()+"h"+ this.endTime.getMinutes());//+"m"+ this.endTime.getSeconds()+"s");
+
+            //On met un 0 devant l'heure si elle est inferieure à 10
+            if(this.endTime.getHours() < 10 & this.endTime.getHours() != 0) {
+                this.finalHour = "0"+this.endTime.getHours();
+            }
+            else {
+                this.finalHour = this.endTime.getHours();
+            }
+
+            //On met un 0 devant les minutes si elles sont inferieures à 10
+            if(this.endTime.getMinutes() < 10 & this.endTime.getMinutes() != 0) {
+                this.finalMin = "0"+this.endTime.getMinutes();
+            }
+            else {
+                this.finalMin = this.endTime.getMinutes();
+            }
+
+            $('#endTimer').text(this.finalHour+"h"+ this.finalMin);
             this.tempo();
         }
 

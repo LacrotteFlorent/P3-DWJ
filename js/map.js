@@ -44,6 +44,7 @@ class Map {                                       // Classe Map //
         $('#cityList').change(function () {
             this.contrat = $('#cityList').val();
             this.refresh();
+            $('html,body').animate({scrollTop: $("#sectionCarte").offset().top}, 'slow');
         }.bind(this));
     }
 

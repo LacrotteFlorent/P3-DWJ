@@ -24,8 +24,9 @@ class Component {                                 // Classe Composant //
         $('#veloDescription').text(" " + this.nbVelo);
         $('#placeDescription').text(" " + this.nbPlace);
         $('#coordonneeDescription').text('Lat. ' + this.latitude + ' , Long. ' + this.longitude);
-        $("#informations").removeClass("d-none").addClass("d-block col-lg-3");
+        $("#informations").removeClass("d-none").addClass("d-flex col-lg-3");
         $("#carte").removeClass("col-lg-12").addClass("col-lg-9");
+        $('html,body').animate({scrollTop: $("#informations").offset().top}, 'slow');
 
         this.canvas = new Canvas;
         this.canvas.initCanvas(); // ATTENTION on initialise le canvas une fois l'element visible (sinon .offset ne fonctionne pas !)
@@ -33,7 +34,7 @@ class Component {                                 // Classe Composant //
         //ferme l'encart description
         $('#fermerReservation').on('click', function() {
             $("#carte").removeClass("col-lg-9").addClass("col-lg-12");
-            $("#informations").removeClass("d-block col-lg-3").addClass("d-none");
+            $("#informations").removeClass("d-flex col-lg-3").addClass("d-none");
         });
     }
 
@@ -53,7 +54,7 @@ class Component {                                 // Classe Composant //
                     this.hourResa.setMinutes(this.hourResa.getMinutes() + globalConfig.bookingTime); // On ajoute le timer de la réservation
                     this.hourResa = (this.hourResa.getTime()); // On récupère la date en TimeStamp
                     this.resa = new Booking(false, $('#nomFormReservation').val(), $('#prenomFormReservation').val(), this.stationID, this.hourResa, this.adresse );
-                    $('#informations').removeClass("d-block col-lg-3").addClass("d-none");
+                    $('#informations').removeClass("d-flex col-lg-3").addClass("d-none");
                     $("#carte").removeClass("col-lg-9").addClass("col-lg-12");
                     e.preventDefault();
                     return false;
