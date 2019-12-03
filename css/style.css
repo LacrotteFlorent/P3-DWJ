@@ -18,9 +18,6 @@ img {
 
                                                                                                                 /* Header */
 
-header {
-    height: 150px;
-}
 
 .navigation {
     height: 150px;
@@ -29,7 +26,7 @@ header {
 
 .titre1 {
     text-transform: uppercase;
-    color: #BE9305;
+    color: #F7BE03;
     font-size: 1.4em;
     font-weight: 300;
     font-family: 'Permanent Marker', Arial, sans-serif;
@@ -186,6 +183,7 @@ header {
     z-index: 10;
 }
 
+
                                                                                                                 /* Sous Section 2 */
 
 #sousSection2 {
@@ -195,12 +193,7 @@ header {
 
                                                                                                                 /* Slider */
 
-#sectionSlider {
-    height: auto;
-    min-height: 800px;
-}
-
-#sectionSlider >div {
+#sectionSlider, #sectionSlider > div {
     height: auto;
     min-height: 800px;
 }
@@ -225,6 +218,7 @@ header {
     color: #333;
     font-size: 1.5em;
 }
+
 /* BLOC SLIDES */
 .blocSlide {
     background-color: #F5F3F1;
@@ -258,11 +252,11 @@ header {
     margin-top: 35px;
 }
 
-#bloc12 {
+#bloc12, #bloc23, #bloc31, #bloc52 {
     background-color: white;
 }
 
-#bloc12 > p {
+#bloc12 > p, #bloc23 > p, #bloc31 > p, #bloc52 > p  {
     color: #333;
 }
 
@@ -271,22 +265,6 @@ header {
     background-position: center;
     background-image: url(../img/clusters.jpg);
     box-shadow: none;
-}
-
-#bloc23 {
-    background-color: white;
-}
-
-#bloc23 > p {
-    color: #333;
-}
-
-#bloc31 {
-    background-color: white;
-}
-
-#bloc31 > p {
-    color: #333;
 }
 
 #bloc32 {
@@ -318,17 +296,10 @@ header {
     box-shadow: none;
 }
 
-#bloc52 {
-    background-color: white;
-}
-
-#bloc52 > p {
-    color: #333;
-}
 
 #bloc62 {
     background-size: cover;
-    background-position: top;
+    background-position: bottom;
     background-image: url(../img/reservation.jpg);
     box-shadow: none;
 }
@@ -360,9 +331,6 @@ header {
     line-height: 1.2em !important;
 }
 
-.bigText {
-    margin-bottom: 1.2em;
-}
 
 .cercle {
     width: 40px;
@@ -385,7 +353,6 @@ header {
 }
 
 
-
                                                                                                                /* Boutons slider */
 
 
@@ -399,7 +366,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: aliceblue;
+    background-color: #FFFFFF;
     border-radius: 5px;
     box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.75);
 }
@@ -414,7 +381,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: aliceblue;
+    background-color: #FFFFFF;
     border-radius: 5px;
     box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.75);
     display: flex;
@@ -543,6 +510,8 @@ header {
 .fa-times:hover {
     color: #952e28;
 }
+
+
                                          /* CANVAS */
 #canvas {
     width: 150px;
@@ -600,7 +569,6 @@ header {
 
 
                                                                                                               /* Pied de page */
-
 
 footer {
     height: auto;

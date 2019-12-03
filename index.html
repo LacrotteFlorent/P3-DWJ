@@ -1,13 +1,9 @@
 ﻿<!DOCTYPE HTML>
 <!-- Couleurs :
     Blanc       #FFFFFF
-    Gris        #494E51
-    Gris clair  #9EA5A7
-    Rouge       #DD1824
-    Rouge foncé #7A050C
-    Jaune clair #FFD903
+    Gris        #333
+    Gris clair  #919191
     Jaune foncé #F7BE03
-    Bleu        #014599
     Bleu clair  #015BC9
     -->
 <!-- Carte interactive - Made by Lacrotte Florent / Projet 3 - OpenClassrooms -->
@@ -33,7 +29,7 @@
     <link rel="stylesheet" href= "https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
     <link rel="stylesheet" href= "https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Advent+Pro|Oswald|Roboto+Slab|Short+Stack|Permanent+Marker|Righteous|Mansalva&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Permanent+Marker|Righteous&display=swap" rel="stylesheet" />
     <!-- Fav Icon -->
     <link rel="icon" href=" ./img/faviconVelilov.ico" />
     <!-- Titre -->
@@ -46,7 +42,7 @@
     <!-- Open Graph data -->
     <meta property="og:title" content="Vélilov, réservez en ligne" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="http://www.example.com/" /> <!-- A MODIFIER -->
+    <meta property="og:url" content="http://www.velilov.com/" /> <!-- A MODIFIER -->
     <meta property="og:image" content="./img/logoVelilov.png" />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:description" content="Vélilov, gagnez du temps, réservez votre vélo en ligne" />
@@ -75,25 +71,24 @@
                             <div class="row navigation">
                                 <div class="d-none d-md-none d-lg-block col-md-1 col-lg-2 navigation" id="navLogo">
                                     <div id="conteneurLogo">
-                                        <img src="./img/logoVelilov.png" />
+                                        <img src="./img/logoVelilov.png" alt="Logo Vélilov" />
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-7 col-lg-5 navigation" id="navTitre">
-                                    <h1><span class="titre1">Véli</span><span class="titre2">lov</span> </br> Réserve ton vélo en ligne</h1><noscript>Vous devez ativer votre JavaScript Pour utiliser le site</noscript>
+                                    <h1><span class="titre1">Véli</span><span class="titre2">lov</span> <br/> Réserve ton vélo en ligne</h1><noscript>Vous devez ativer votre JavaScript Pour utiliser le site</noscript>
                                 </div>
                                 <div class="d-none d-md-block d-lg-block col-md-1 col-lg-1 navigation" id="navCarte">
                                     <a href="#sectionCarte"><i class="fas fa-map-marked-alt"></i></a>
                                 </div>
                                 <div class="col-12 col-md-4 col-lg-3 navigation" id="navList">
-                                    <label for="cityList">Choisi ta ville:</label>
+                                    <label for="cityList">Choisis ta ville:</label>
                                     <div>
                                         <select name="city" id="cityList">
                                             <!-- Liste chargée en JS -->
                                         </select>
                                     </div>
                                 </div>
-                                <div class="d-none d-lg-block col-lg-3 navigation" id="navEspace">
-                                </div>
+                                <div class="d-none d-lg-block col-lg-3 navigation" id="navEspace"></div>
                             </div>
                         </header>
 
@@ -127,20 +122,20 @@
                                             <div class="row">
                                                 <div class="col-md-2 col-lg-1 col-xl-2"></div>
                                                 <div id="bloc11" class="col-md-8 col-lg-6 col-xl-4 blocSlide blocType3 blocText">
-                                                    <p>Trouve facilement ton vélo </br><span class="litleText">et vérifie l'état des stations de ta ville.</span></span></p>
+                                                    <p>Trouve facilement ton vélo <br/><span class="litleText">et vérifie l'état des stations de ta ville.</span></p>
                                                     <div class="bulleInfo">
                                                         <div class="cercle">1</div>
-                                                        <p>Choisi ta Ville</p></br>
+                                                        <p>Choisis ta ville</p><br/>
                                                     </div>
                                                     <p><span class="litleText">Dans la bannière juste au dessus !</span></p>
                                                 </div>
                                                 <div class="col-md-2 col-lg-1 col-xl-1"></div>
                                                 <div class="col-md-2 d-md-block d-lg-none d-xl-none"></div>
                                                 <div id="bloc12" class="col-md-8 col-lg-3 col-xl-3 blocSlide blocType3 blocText">
-                                                    <p class="bigText">Tout ce passe sur la carte interactive !</p>
-                                                    </br>
+                                                    <p class="bigText">Tout se passe sur la carte interactive !</p>
+                                                    <br/>
                                                     <p><span class="d-none d-md-block litleText">Tu peux accéder à la carte en cliquant sur l'icone dans la bannière.</span><span class="d-block d-md-none litleText">Tu peux accéder à la carte un peu plus bas</span></p>
-                                                    </br>
+                                                    <br/>
                                                     <p><span class=" d-none d-md-block litleText">Sinon c'est par là.</span></p>
                                                     <i class="fas fa-level-down-alt"></i>
                                                 </div>
@@ -150,7 +145,7 @@
                                         <div id="slide2" class="col-12 slide startHidden">
                                             <div class="row">
                                                 <div class="col-md-2 col-lg-1 col-xl-2"></div>
-                                                <div id="bloc21"class="col-md-8 col-lg-4 col-xl-3 blocSlide blocImage blocType3">
+                                                <div id="bloc21" class="col-md-8 col-lg-4 col-xl-3 blocSlide blocImage blocType3">
                                                     <!-- img en background -->
                                                 </div>
                                                 <div class="col-1 col-md-2 col-lg-1"></div>
@@ -170,7 +165,7 @@
                                                             <div class="row">
                                                                 <div class="d-none d-md-block col-md-2"></div>
                                                                 <div id="bloc23" class="col-12 col-md-10 blocSlide blocType1 blocText">
-                                                                    <p>Zoome pour les afficher !</p>
+                                                                    <p>Zoome pour les afficher en détails !</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -196,19 +191,19 @@
                                                         <div id="bloc32" class="col-12 blocSlide blocType1 blocText">
                                                             <p>Ouverte</p>
                                                         </div>
-                                                        <div class="col-none col-md-block col-md-12 blocInvisible blocType1"></div>
+                                                        <div class="col-none d-md-block col-md-12 blocInvisible blocType1"></div>
                                                         <div id="bloc33" class="col-12 blocSlide blocType1 blocText">
                                                             <p>Fermée</p>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-1 col-lg-block col-lg-1"></div>
+                                                <div class="col-md-1 d-lg-block col-lg-1"></div>
                                                 <div class="col-md-4 col-lg-3 col-xl-3 ">
                                                     <div class="row">
                                                         <div id="bloc34" class="col-12 blocSlide blocType1 blocText">
                                                             <p>Plus de places</p>
                                                         </div>
-                                                        <div class="col-none col-md-block col-md-12 blocInvisible blocType1"></div>
+                                                        <div class="col-none d-md-block col-md-12 blocInvisible blocType1"></div>
                                                         <div id="bloc35" class="col-12 blocSlide blocType1 blocText">
                                                             <p>Plus de vélos</p>
                                                         </div>
@@ -225,7 +220,7 @@
                                                         <div class="cercle">3</div>
                                                         <p>Les marqueurs</p>
                                                     </div>
-                                                    <p><span class="litleText">Clique sur un marqueur pour avoir plus de détails, et réserver ton vélo !</span></p>
+                                                    <p><span class="litleText">Clique sur un marqueur pour avoir plus de détails et réserver ton vélo !</span></p>
                                                 </div>
                                                 <div class="col-md-2 col-lg-1 col-xl-1"></div>
                                                 <div class="d-md-block d-lg-none col-md-2 col-lg-1 col-xl-1"></div>
@@ -248,7 +243,7 @@
                                                         <div class="cercle">4</div>
                                                         <p>Réserve ton vélo</p>
                                                     </div>
-                                                    <p><span class="litleText">Renseigne les champs, et clique sur réserver. Ton vélo t'attendra 20 minutes.</span></p>
+                                                    <p><span class="litleText">Renseigne les champs et clique sur réserver. Ton vélo t'attendra 20 minutes.</span></p>
                                                 </div>
                                                 <div class="d-none d-md-block col-md-2 col-lg-1 col-xl-2"></div>
                                             </div>
@@ -259,9 +254,9 @@
                                                 <div id="bloc61" class="col-md-8 col-lg-3 col-xl-2 blocSlide blocType3 blocText">
                                                     <div class="bulleInfo">
                                                         <div class="cercle">5</div>
-                                                        <p>Le temps restant</p>
+                                                        <p>Tu as 20 minutes pour le récupérer</p>
                                                     </div>
-                                                    <p><span class="litleText">La bannière qui s'affiche au dessus de la carte te donne le temps restant</span></p>
+                                                    <p><span class="litleText">La bannière qui s'affiche au dessous de la carte te donne le temps restant</span></p>
                                                 </div>
                                                 <div class="col-md-2 col-lg-1 col-xl-1"></div>
                                                 <div class="d-md-block d-lg-none col-md-2 col-lg-1 col-xl-1"></div>
@@ -281,9 +276,7 @@
 
                 <div id="sousSection2" class="col-lg-12">
                     <div class="row">
-                        <div id="infoReservation" class="col-lg-12 d-none">
-                            <p>Vous avez jusqu'à <span id="endTimer">blabla</span> pour récupérer votre vélo à : <span id="adressReservation"> adresse </span> | <span id="timerReservation">19</span> restantes</p>
-                        </div>
+                        
 
                         <div id="sectionCarte" class="col-lg-12">
                             <div class="row">
@@ -302,19 +295,19 @@
                                             <p class="mentions">Réservation</p>
                                             <form id="formulaire_reservation">
                                                 <p>
-                                                <label for="nom">Entrez votre nom: </label>
+                                                <label for="nomFormReservation">Entrez votre nom: </label>
                                                 <br>
                                                 <input type="text" name="nom" id="nomFormReservation" placeholder="Nom">
                                                 </p>
                                                 <p>
-                                                    <label for="prenom">Entrez votre prénom: </label>
+                                                    <label for="prenomFormReservation">Entrez votre prénom: </label>
                                                     <br>
                                                     <input type="text" name="prenom" id="prenomFormReservation" placeholder="Prénom">
                                                 </p>
                                                 <div id="divCanvas">
                                                     <p>Signature :</p>
                                                     <button type="button" id="boutonEffacerCanvas"><i class="fas fa-eraser"></i></button>
-                                                    <canvas id="canvas" width="150" heigth="150">
+                                                    <canvas id="canvas" width="150" height="150">
                                                         <!-- balise canvas pour signature -->
                                                     </canvas>
                                                 </div>
@@ -327,8 +320,12 @@
                             </div>
                         </div>
 
+                        <div id="infoReservation" class="col-lg-12 d-none">
+                            <p>Vous avez jusqu'à <span id="endTimer">blabla</span> pour récupérer votre vélo à : <span id="adressReservation"> adresse </span> | <span id="timerReservation">19</span> restantes</p>
+                        </div>
+
                         <footer id="piedDePage" class="col-lg-12">
-                            <p> Ce site est à but éducatif, est à été entièrement réalisé par Lacrotte Florent, en suivant la formation de Développeur Web Junior chez Oppenclassrooms. 01/11/2019</p>
+                            <p> Ce site à but éducatif à été entièrement réalisé par Lacrotte Florent, en suivant la formation de Développeur Web Junior chez Oppenclassrooms. 01/11/2019</p>
                         </footer>
                     </div>
                 </div>

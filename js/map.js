@@ -90,7 +90,20 @@ class Map {                                       // Classe Map //
             let station;
             this.stationID = 1;
             for (station of stations) {
-                const stationVelilov = new Station(station.address, station.status, station.totalStands.availabilities.bikes, station.totalStands.availabilities.stands, station.position.latitude, station.position.longitude, this.stationID);
+                let adresseCheker;
+                if(station.address === "") {
+                    adresseCheker = station.name;
+                }
+                else {
+                    adresseCheker = station.address;
+                }
+
+                let statusCheker = station.status;
+                if(station.totalStands.availabilities.stands === 0 & station.totalStands.availabilities.bikes === 0) {
+                    statusCheker = "CLOSE";
+                }
+
+                const stationVelilov = new Station(adresseCheker, statusCheker, station.totalStands.availabilities.bikes, station.totalStands.availabilities.stands, station.position.latitude, station.position.longitude, this.stationID);
                 this.stationID ++;
                 //stationVelilov.showDetail();
                 this.markers.addLayer(stationVelilov.marqueur);

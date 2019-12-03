@@ -27,12 +27,7 @@
     height: 300px;
 }
 
-#bloc11 {
-    margin-top: -60px;
-    margin-bottom: 30px;
-}
-
-#bloc21 {
+#bloc11, #bloc21 {
     margin-top: -60px;
     margin-bottom: 30px;
 }
@@ -68,9 +63,5 @@
     height: auto;
 }
 
-                                /* pied de page */
-footer {
-    /*height: 100px;*/
-}
 
 
